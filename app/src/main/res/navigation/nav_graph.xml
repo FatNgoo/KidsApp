@@ -10,15 +10,40 @@
         android:id="@+id/homeFragment"
         android:name="com.edu.kidsapp.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        
+        <!-- Action to navigate to Map Fragment -->
+        <action
+            android:id="@+id/action_home_to_map"
+            app:destination="@id/mapFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
 
-    <!-- Future fragments can be added here -->
-    <!-- Example:
+    <!-- Map Fragment - Adventure Map / Lesson Selection -->
     <fragment
-        android:id="@+id/schoolFragment"
-        android:name="com.edu.kidsapp.SchoolFragment"
-        android:label="School"
-        tools:layout="@layout/fragment_school" />
-    -->
+        android:id="@+id/mapFragment"
+        android:name="com.edu.kidsapp.MapFragment"
+        android:label="Adventure Map"
+        tools:layout="@layout/fragment_map">
+        
+        <!-- Action to navigate to Lesson Fragment -->
+        <action
+            android:id="@+id/action_map_to_lesson"
+            app:destination="@id/lessonFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <!-- Lesson Fragment - Flashcard View -->
+    <fragment
+        android:id="@+id/lessonFragment"
+        android:name="com.edu.kidsapp.LessonFragment"
+        android:label="Lesson"
+        tools:layout="@layout/fragment_lesson" />
 
 </navigation>

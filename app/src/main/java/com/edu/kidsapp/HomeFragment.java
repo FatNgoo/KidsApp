@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.card.MaterialCardView;
 
@@ -74,10 +75,10 @@ public class HomeFragment extends Fragment {
      * Setup click listeners for all interactive elements
      */
     private void setupClickListeners() {
-        // School Button
+        // School Button - Navigate to Adventure Map
         cardSchool.setOnClickListener(v -> {
             animateBounce(v);
-            Toast.makeText(requireContext(), "Loading School...", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(v).navigate(R.id.action_home_to_map);
         });
 
         // Shop Button
