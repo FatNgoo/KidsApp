@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_app"
+    android:background="@drawable/background"
     android:padding="16dp">
 
     <!-- Header Left: User Profile Card -->
@@ -148,7 +148,7 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/placeholder_school" />
+                android:src="@drawable/school" />
 
             <TextView
                 android:layout_width="wrap_content"
