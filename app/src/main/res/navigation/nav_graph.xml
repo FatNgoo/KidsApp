@@ -29,6 +29,15 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Shop -->
+        <action
+            android:id="@+id/action_home_to_shop"
+            app:destination="@id/shopFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <!-- Map Fragment - Adventure Map / Lesson Selection -->
@@ -61,5 +70,12 @@
         android:name="com.edu.kidsapp.GameLobbyFragment"
         android:label="Game Zone"
         tools:layout="@layout/fragment_game_lobby" />
+
+    <!-- Shop Fragment - Toy Store -->
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.edu.kidsapp.ShopFragment"
+        android:label="Toy Store"
+        tools:layout="@layout/fragment_shop" />
 
 </navigation>
