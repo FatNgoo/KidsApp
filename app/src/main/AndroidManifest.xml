@@ -27,6 +27,17 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        
+        <!-- Game Activities -->
+        <activity
+            android:name=".CookingGameActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        
+        <activity
+            android:name=".DetectiveGameActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
             
     </application>
 

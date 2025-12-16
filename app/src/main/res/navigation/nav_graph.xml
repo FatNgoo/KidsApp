@@ -20,6 +20,15 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Game Lobby -->
+        <action
+            android:id="@+id/action_home_to_game_lobby"
+            app:destination="@id/gameLobbyFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <!-- Map Fragment - Adventure Map / Lesson Selection -->
@@ -45,5 +54,12 @@
         android:name="com.edu.kidsapp.LessonFragment"
         android:label="Lesson"
         tools:layout="@layout/fragment_lesson" />
+
+    <!-- Game Lobby Fragment - Game Zone -->
+    <fragment
+        android:id="@+id/gameLobbyFragment"
+        android:name="com.edu.kidsapp.GameLobbyFragment"
+        android:label="Game Zone"
+        tools:layout="@layout/fragment_game_lobby" />
 
 </navigation>

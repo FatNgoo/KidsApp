@@ -87,10 +87,10 @@ public class HomeFragment extends Fragment {
             Toast.makeText(requireContext(), "Loading Shop...", Toast.LENGTH_SHORT).show();
         });
 
-        // Game Zone Button
+        // Game Zone Button - Navigate to Game Lobby
         cardGame.setOnClickListener(v -> {
             animateBounce(v);
-            Toast.makeText(requireContext(), "Loading Games...", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(v).navigate(R.id.action_home_to_game_lobby);
         });
 
         // Settings Button
