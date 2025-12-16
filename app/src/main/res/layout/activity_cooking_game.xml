@@ -4,20 +4,109 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_app">
+    android:background="@color/bg_app"
+    android:padding="16dp">
 
+    <!-- Score Board (Top-Right) -->
     <TextView
+        android:id="@+id/tvScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="🚧 Under Construction 🚧\n\nCooking Game\nComing Soon!"
-        android:textAlignment="center"
+        android:text="Score: 0"
         android:textColor="@color/text_dark"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Customer Order (Speech Bubble) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardOrder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/card_white"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toStartOf="@id/tvScore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="I want an APPLE! 🍎"
+            android:textColor="@color/pastel_orange"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Cooking Pot (Drop Zone - Center) -->
+    <ImageView
+        android:id="@+id/img_pot"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_pot"
+        app:layout_constraintBottom_toTopOf="@id/scrollShelf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/cardOrder" />
+
+    <!-- Food Shelf (Bottom - Horizontal Scroll) -->
+    <HorizontalScrollView
+        android:id="@+id/scrollShelf"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <!-- Apple -->
+            <ImageView
+                android:id="@+id/img_apple"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/food_apple"
+                android:tag="APPLE" />
+
+            <!-- Banana -->
+            <ImageView
+                android:id="@+id/img_banana"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/food_banana"
+                android:tag="BANANA" />
+
+            <!-- Cabbage -->
+            <ImageView
+                android:id="@+id/img_cabbage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/food_cabbage"
+                android:tag="CABBAGE" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
