@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- 4Kids App Pastel Color Palette -->
+    <color name="bg_app">#FFF9C4</color> <!-- Soft Cream Background -->
+    <color name="pastel_orange">#FFAB91</color> <!-- School/Main Action -->
+    <color name="pastel_green">#A5D6A7</color> <!-- Game Zone -->
+    <color name="pastel_purple">#CE93D8</color> <!-- Shop -->
+    <color name="pastel_blue">#81D4FA</color> <!-- UI Elements -->
+    <color name="text_dark">#37474F</color> <!-- Soft Dark Grey - No Pure Black -->
+    <color name="card_white">#FFFFFF</color> <!-- Card Background -->
+</resources>
