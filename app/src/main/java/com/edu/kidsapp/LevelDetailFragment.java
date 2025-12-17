@@ -149,15 +149,11 @@ public class LevelDetailFragment extends Fragment {
 
         // Mini Quiz activity
         cardMiniQuiz.setOnClickListener(v -> {
-            // TODO: Create Mini Quiz activity/fragment
-            Toast.makeText(requireContext(), 
-                "Mini Quiz coming soon! (Tap to mark as completed for testing)", 
-                Toast.LENGTH_SHORT).show();
-            
-            // For testing: mark as completed
-            progressManager.setActivityCompleted(levelId, "miniquiz");
-            levelProgress = progressManager.getLevelProgress(levelId);
-            updateProgressUI();
+            // Navigate to Mini Quiz
+            Bundle bundle = new Bundle();
+            bundle.putInt("levelId", levelId);
+            bundle.putString("activityType", "miniquiz");
+            Navigation.findNavController(view).navigate(R.id.action_levelDetail_to_miniQuiz, bundle);
         });
     }
 

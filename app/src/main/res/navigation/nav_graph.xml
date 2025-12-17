@@ -107,6 +107,15 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Mini Quiz -->
+        <action
+            android:id="@+id/action_levelDetail_to_miniQuiz"
+            app:destination="@id/miniQuizFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <!-- Lesson Fragment - Flashcard View -->
@@ -132,6 +141,13 @@
         android:name="com.edu.kidsapp.WordWorkshopFragment"
         android:label="Word Workshop"
         tools:layout="@layout/fragment_word_workshop" />
+
+    <!-- Mini Quiz Fragment - Multiple Choice Quiz -->
+    <fragment
+        android:id="@+id/miniQuizFragment"
+        android:name="com.edu.kidsapp.MiniQuizFragment"
+        android:label="Mini Quiz"
+        tools:layout="@layout/fragment_mini_quiz" />
 
     <!-- Game Lobby Fragment - Game Zone -->
     <fragment
