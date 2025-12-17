@@ -55,6 +55,15 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Music Map -->
+        <action
+            android:id="@+id/action_school_lobby_to_music_map"
+            app:destination="@id/musicMapFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <!-- Map Fragment - Adventure Map / Lesson Selection -->
@@ -148,6 +157,30 @@
         android:name="com.edu.kidsapp.MiniQuizFragment"
         android:label="Mini Quiz"
         tools:layout="@layout/fragment_mini_quiz" />
+
+    <!-- Music Map Fragment - Song Library -->
+    <fragment
+        android:id="@+id/musicMapFragment"
+        android:name="com.edu.kidsapp.MusicMapFragment"
+        android:label="Music Library"
+        tools:layout="@layout/fragment_music_map">
+        
+        <!-- Action to navigate to Music Room with selected song -->
+        <action
+            android:id="@+id/action_music_map_to_music_room"
+            app:destination="@id/musicRoomFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <!-- Music Room Fragment - Learn through Songs -->
+    <fragment
+        android:id="@+id/musicRoomFragment"
+        android:name="com.edu.kidsapp.MusicRoomFragment"
+        android:label="Music Room"
+        tools:layout="@layout/fragment_music_room" />
 
     <!-- Game Lobby Fragment - Game Zone -->
     <fragment

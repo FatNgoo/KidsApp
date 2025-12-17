@@ -103,10 +103,9 @@ public class SchoolLobbyFragment extends Fragment {
                 break;
 
             case 2:
-                // Music Room - Placeholder
-                Toast.makeText(getContext(),
-                        "🎵 Music Room - Coming Soon!",
-                        Toast.LENGTH_SHORT).show();
+                // Music Room - Navigate to Music Map (Song Library)
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.action_school_lobby_to_music_map);
                 break;
 
             case 3:
