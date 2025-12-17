@@ -3,6 +3,7 @@ package com.edu.kidsapp;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -21,14 +22,15 @@ import com.google.android.material.card.MaterialCardView;
 
 /**
  * HomeFragment - Main screen for 4Kids English Learning App
- * Displays floating town concept with School, Shop, and Game Zone
+ * Duolingo-inspired design with direct game access
+ * Features: Bright colors, game cards, progress tracking, motivational UI
  */
 public class HomeFragment extends Fragment {
 
     // UI Components
-    private MaterialCardView cardSchool, cardShop, cardGame;
+    private MaterialCardView cardSchool, cardShop, cardMasterChef, cardDetective, 
+                             cardWordWorkshop, cardMoreGames;
     private View btnSettings;
-    private TextView tvTicketCount, tvGoldCount;
 
     @Nullable
     @Override
@@ -49,26 +51,34 @@ public class HomeFragment extends Fragment {
 
         // Setup Click Listeners
         setupClickListeners();
+        
+        // Add entrance animations
+        animateEnter();
     }
 
     /**
      * Initialize all view components using findViewById
      */
     private void initializeViews(View view) {
+        // Quick access
         cardSchool = view.findViewById(R.id.cardSchool);
         cardShop = view.findViewById(R.id.cardShop);
-        cardGame = view.findViewById(R.id.cardGame);
+        
+        // Game cards
+        cardMasterChef = view.findViewById(R.id.cardMasterChef);
+        cardDetective = view.findViewById(R.id.cardDetective);
+        cardWordWorkshop = view.findViewById(R.id.cardWordWorkshop);
+        cardMoreGames = view.findViewById(R.id.cardMoreGames);
+        
+        // Top bar
         btnSettings = view.findViewById(R.id.btnSettings);
-        tvTicketCount = view.findViewById(R.id.tvTicketCount);
-        tvGoldCount = view.findViewById(R.id.tvGoldCount);
     }
 
     /**
-     * Set dummy data for tickets and gold
+     * Set dummy data - No longer needed
      */
     private void setDummyData() {
-        tvTicketCount.setText("3");
-        tvGoldCount.setText("150");
+        // Data removed as gold counter is removed
     }
 
     /**
@@ -87,8 +97,28 @@ public class HomeFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_home_to_shop);
         });
 
-        // Game Zone Button - Navigate to Game Lobby
-        cardGame.setOnClickListener(v -> {
+        // MasterChef Game - Direct launch
+        cardMasterChef.setOnClickListener(v -> {
+            animateBounce(v);
+            Intent intent = new Intent(requireContext(), CookingGameActivity.class);
+            startActivity(intent);
+        });
+
+        // Detective Game - Direct launch
+        cardDetective.setOnClickListener(v -> {
+            animateBounce(v);
+            Intent intent = new Intent(requireContext(), DetectiveGameActivity.class);
+            startActivity(intent);
+        });
+
+        // Word Workshop - Coming soon
+        cardWordWorkshop.setOnClickListener(v -> {
+            animateBounce(v);
+            Toast.makeText(requireContext(), "🎓 Word Workshop coming soon!", Toast.LENGTH_SHORT).show();
+        });
+
+        // More Games - Navigate to Game Lobby
+        cardMoreGames.setOnClickListener(v -> {
             animateBounce(v);
             Navigation.findNavController(v).navigate(R.id.action_home_to_game_lobby);
         });
@@ -108,16 +138,16 @@ public class HomeFragment extends Fragment {
      */
     private void animateBounce(View view) {
         // Scale down animation
-        ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f, 0.9f);
-        ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f, 0.9f);
-        scaleDownX.setDuration(150);
-        scaleDownY.setDuration(150);
+        ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f, 0.92f);
+        ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f, 0.92f);
+        scaleDownX.setDuration(100);
+        scaleDownY.setDuration(100);
 
-        // Scale up animation
-        ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(view, "scaleX", 0.9f, 1.0f);
-        ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(view, "scaleY", 0.9f, 1.0f);
-        scaleUpX.setDuration(150);
-        scaleUpY.setDuration(150);
+        // Scale up animation with overshoot
+        ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(view, "scaleX", 0.92f, 1.05f, 1.0f);
+        ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(view, "scaleY", 0.92f, 1.05f, 1.0f);
+        scaleUpX.setDuration(200);
+        scaleUpY.setDuration(200);
 
         // Combine animations
         AnimatorSet scaleDown = new AnimatorSet();
@@ -130,6 +160,28 @@ public class HomeFragment extends Fragment {
         AnimatorSet bounce = new AnimatorSet();
         bounce.play(scaleDown).before(scaleUp);
         bounce.start();
+    }
+
+    /**
+     * Animate entrance of game cards with staggered delays
+     */
+    private void animateEnter() {
+        View[] cards = {cardSchool, cardShop, cardMasterChef, cardDetective, 
+                        cardWordWorkshop, cardMoreGames};
+        
+        for (int i = 0; i < cards.length; i++) {
+            if (cards[i] != null) {
+                cards[i].setAlpha(0f);
+                cards[i].setTranslationY(50f);
+                
+                cards[i].animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setDuration(400)
+                    .setStartDelay(i * 80L)
+                    .start();
+            }
+        }
     }
 
     /**
@@ -151,10 +203,10 @@ public class HomeFragment extends Fragment {
                 .setPositiveButton("Submit", (dialog, which) -> {
                     String answer = input.getText().toString().trim();
                     if (answer.equals("15")) {
-                        Toast.makeText(requireContext(), "Access Granted ✓", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "✅ Access Granted!", Toast.LENGTH_SHORT).show();
                         // TODO: Navigate to settings screen
                     } else {
-                        Toast.makeText(requireContext(), "Try Again ✗", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "❌ Try Again!", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())

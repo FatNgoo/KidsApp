@@ -38,4 +38,18 @@
     <color name="detective_light">#ECF0F1</color> <!-- Light background -->
     <color name="detective_dark">#34495E</color> <!-- Dark text -->
     <color name="detective_yellow">#F1C40F</color> <!-- Highlight yellow -->
+    
+    <!-- Duolingo-Inspired Home Theme Colors -->
+    <color name="duo_green">#58CC02</color> <!-- Bright green (primary) -->
+    <color name="duo_blue">#1CB0F6</color> <!-- Sky blue -->
+    <color name="duo_red">#FF4B4B</color> <!-- Vibrant red -->
+    <color name="duo_yellow">#FFC800</color> <!-- Golden yellow -->
+    <color name="duo_purple">#CE82FF</color> <!-- Soft purple -->
+    <color name="duo_pink">#FF85C3</color> <!-- Playful pink -->
+    <color name="duo_orange">#FF9600</color> <!-- Energetic orange -->
+    <color name="duo_background">#FFFFFF</color> <!-- White background -->
+    <color name="duo_gray">#AFAFAF</color> <!-- Neutral gray -->
+    <color name="duo_dark_green">#58A700</color> <!-- Dark green -->
+    <color name="duo_light_green">#D7FFB8</color> <!-- Light green -->
+    <color name="duo_super_light">#F7F7F7</color> <!-- Super light gray -->
 </resources>
