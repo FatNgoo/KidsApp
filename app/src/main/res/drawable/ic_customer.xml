@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cute Customer Character for MasterChef Game -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- Hair (Brown) - Top -->
+    <path
+        android:pathData="M40,25 Q45,18 55,18 Q60,15 65,18 Q75,18 80,25 L80,42 L40,42 Z"
+        android:fillColor="#8B4513"/>
+    
+    <!-- Hair (Brown) - Sides -->
+    <path
+        android:pathData="M32,35 L32,52 L38,52 L38,40 L32,35 Z"
+        android:fillColor="#8B4513"/>
+    <path
+        android:pathData="M88,35 L88,52 L82,52 L82,40 L88,35 Z"
+        android:fillColor="#8B4513"/>
+    
+    <!-- Face (Peach/Skin tone) - Oval shape -->
+    <path
+        android:pathData="M38,42 L82,42 Q88,42 88,50 L88,75 Q88,85 80,88 L40,88 Q32,85 32,75 L32,50 Q32,42 38,42 Z"
+        android:fillColor="#FFD7B5"/>
+    
+    <!-- Excited Eyes (Wide open) - Left Eye -->
+    <path
+        android:pathData="M45,55 Q45,50 48,50 Q51,50 51,55 Q51,60 48,60 Q45,60 45,55 Z"
+        android:fillColor="#FFFFFF"/>
+    <path
+        android:pathData="M46,54 L46,58 L50,58 L50,54 Z"
+        android:fillColor="#333333"/>
+    
+    <!-- Excited Eyes - Right Eye -->
+    <path
+        android:pathData="M69,55 Q69,50 72,50 Q75,50 75,55 Q75,60 72,60 Q69,60 69,55 Z"
+        android:fillColor="#FFFFFF"/>
+    <path
+        android:pathData="M70,54 L70,58 L74,58 L74,54 Z"
+        android:fillColor="#333333"/>
+    
+    <!-- Excited Mouth (Open smile O shape) -->
+    <path
+        android:pathData="M55,70 Q55,66 60,66 Q65,66 65,70 Q65,75 60,75 Q55,75 55,70 Z"
+        android:fillColor="#FF6B6B"/>
+    
+    <!-- Teeth -->
+    <path
+        android:pathData="M57,68 L63,68 L63,70 L57,70 Z"
+        android:fillColor="#FFFFFF"/>
+    
+    <!-- Rosy Cheeks -->
+    <path
+        android:pathData="M38,65 Q38,62 42,62 Q46,62 46,65 Q46,68 42,68 Q38,68 38,65 Z"
+        android:fillColor="#FFB6C1"/>
+    <path
+        android:pathData="M74,65 Q74,62 78,62 Q82,62 82,65 Q82,68 78,68 Q74,68 74,65 Z"
+        android:fillColor="#FFB6C1"/>
+    
+    <!-- Body/Shirt (Bright Pink) -->
+    <path
+        android:pathData="M35,88 L85,88 L88,95 L88,115 L32,115 L32,95 Z"
+        android:fillColor="#FF85B3"/>
+    
+    <!-- Collar V-neck -->
+    <path
+        android:pathData="M50,88 L55,93 L60,90 L65,93 L70,88"
+        android:strokeColor="#FF6B9D"
+        android:strokeWidth="2"/>
+    
+    <!-- Arms (excited gesture) - Left -->
+    <path
+        android:pathData="M35,92 L22,88 L20,95 L25,98 L35,98 Z"
+        android:fillColor="#FFD7B5"/>
+    
+    <!-- Arms - Right -->
+    <path
+        android:pathData="M85,92 L98,88 L100,95 L95,98 L85,98 Z"
+        android:fillColor="#FFD7B5"/>
+</vector>

@@ -1,219 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- MasterChef Interactive Cooking Game with Chef & Customer Dialogue -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/kitchen_cream"
-    android:padding="16dp">
-
-    <!-- TOP ROW: Customer & Order Section -->
-    
-    <!-- Customer Image Card (Left) -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardCustomer"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        app:cardBackgroundColor="@color/kitchen_pink"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="4dp"
-        app:strokeColor="@color/white"
-        app:strokeWidth="3dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imgCustomer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            android:src="@drawable/ic_customer_placeholder"
-            android:contentDescription="Customer" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- Order Display Card (Right) -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardOrder"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="12dp"
-        app:cardBackgroundColor="@color/kitchen_yellow"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="4dp"
-        app:strokeColor="@color/white"
-        app:strokeWidth="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/cardCustomer"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="12dp"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/tvDishName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:text="Fruit Salad"
-                android:textColor="@color/text_dark"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="4dp">
-
-                <ImageView
-                    android:id="@+id/imgDish"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/food_apple"
-                    android:contentDescription="Dish" />
-
-                <ImageButton
-                    android:id="@+id/btnSpeaker"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_speaker"
-                    android:contentDescription="Read dish name" />
-            </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    android:padding="12dp">
 
     <!-- Score Display (Top Right) -->
     <TextView
         android:id="@+id/tvScore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-black"
         android:text="⭐ 0"
         android:textColor="@color/kitchen_orange"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardOrder" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- MIDDLE ROW: Pot & Checklist Section -->
-
-    <!-- Pot Area (Left) -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardPot"
+    <!-- TOP SECTION: Customer Area -->
+    <FrameLayout
+        android:id="@+id/customerArea"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/kitchen_cream"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="6dp"
-        app:strokeColor="@color/kitchen_brown"
-        app:strokeWidth="4dp"
-        app:layout_constraintBottom_toTopOf="@id/cardIngredients"
-        app:layout_constraintEnd_toStartOf="@id/cardChecklist"
+        android:layout_height="200dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvScore">
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Customer Speech Bubble -->
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-
-            <ImageView
-                android:id="@+id/imgPot"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_pot"
-                android:contentDescription="Cooking pot" />
-
+            android:id="@+id/customerSpeechBubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:visibility="gone">
+            
             <TextView
+                android:id="@+id/tvCustomerSpeech"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|center_horizontal"
+                android:background="@drawable/bg_speech_bubble"
+                android:text="I want order fried chicken"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
                 android:fontFamily="sans-serif-medium"
-                android:text="🍳 Drop Here"
-                android:textColor="@color/kitchen_orange"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:elevation="8dp"
+                android:layout_marginBottom="12dp" />
         </FrameLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <!-- Checklist (Right) -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardChecklist"
-        android:layout_width="140dp"
-        android:layout_height="0dp"
+        <!-- Customer Character -->
+        <ImageView
+            android:id="@+id/imgCustomer"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/ic_customer"
+            android:contentDescription="Customer" />
+    </FrameLayout>
+
+    <!-- MIDDLE SECTION: Chef & Stove Area -->
+    <FrameLayout
+        android:id="@+id/kitchenArea"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
-        app:strokeColor="@color/kitchen_blue"
-        app:strokeWidth="2dp"
-        app:layout_constraintBottom_toTopOf="@id/cardIngredients"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvScore">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/customerArea"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Chef Area (Left Side) -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/chefArea"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="start"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:gravity="center_horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
+            <!-- Chef Speech Bubble -->
+            <FrameLayout
+                android:id="@+id/chefSpeechBubble"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:text="Recipe"
-                android:textAlignment="center"
-                android:textColor="@color/kitchen_blue"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingBottom="8dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/kitchen_blue" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:paddingTop="8dp">
-
-                <LinearLayout
-                    android:id="@+id/checklistContainer"
-                    android:layout_width="match_parent"
+                android:visibility="gone">
+                
+                <TextView
+                    android:id="@+id/tvChefSpeech"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <!-- Checklist items will be added dynamically -->
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                    android:background="@drawable/bg_speech_bubble"
+                    android:text="Waiting five minutes"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:elevation="8dp"
+                    android:layout_marginBottom="12dp" />
+            </FrameLayout>
 
-    <!-- BOTTOM ROW: Ingredients Grid -->
+            <!-- Chef Character -->
+            <ImageView
+                android:id="@+id/imgChef"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_chef"
+                android:contentDescription="Chef" />
+        </LinearLayout>
+
+        <!-- Stove Area (Right Side) -->
+        <FrameLayout
+            android:id="@+id/stoveArea"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="end|center_vertical"
+            android:background="@drawable/bg_stove_area_enhanced"
+            android:padding="16dp">
+
+            <!-- Stove/Flame Icon -->
+            <ImageView
+                android:id="@+id/imgStove"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_stove"
+                android:contentDescription="Stove" />
+
+            <!-- Pan on Stove (Drop Target) -->
+            <ImageView
+                android:id="@+id/imgPan"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_pan"
+                android:visibility="gone"
+                android:contentDescription="Pan" />
+
+            <!-- Cooking Animation -->
+            <TextView
+                android:id="@+id/tvCookingStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-medium"
+                android:text="🔥"
+                android:textSize="40sp"
+                android:visibility="gone" />
+        </FrameLayout>
+    </FrameLayout>
+
+    <!-- BOTTOM SECTION: Ingredients Grid -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardIngredients"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="@color/kitchen_green"
         app:cardCornerRadius="20dp"
         app:cardElevation="6dp"
         app:strokeColor="@color/white"
         app:strokeWidth="3dp"
+        app:layout_constraintTop_toBottomOf="@id/kitchenArea"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">

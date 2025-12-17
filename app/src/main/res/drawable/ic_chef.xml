@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cute Chef Character for MasterChef Game -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- Chef Hat (White) -->
+    <path
+        android:pathData="M30,35 Q30,20 40,20 Q40,10 50,10 Q55,5 60,5 Q65,5 70,10 Q80,10 80,20 Q90,20 90,35 L90,50 L30,50 Z"
+        android:fillColor="#FFFFFF"/>
+    <path
+        android:pathData="M30,35 Q30,20 40,20 Q40,10 50,10 Q55,5 60,5 Q65,5 70,10 Q80,10 80,20 Q90,20 90,35 L90,50 L30,50 Z"
+        android:strokeColor="#333333"
+        android:strokeWidth="2"/>
+    
+    <!-- Hat Band -->
+    <path
+        android:pathData="M28,48 L92,48 L92,55 L28,55 Z"
+        android:fillColor="#E0E0E0"/>
+    
+    <!-- Face (Peach/Skin tone) -->
+    <path
+        android:pathData="M35,55 L85,55 L85,90 Q85,95 80,95 L40,95 Q35,95 35,90 Z"
+        android:fillColor="#FFD7B5"/>
+    
+    <!-- Happy Eyes -->
+    <path
+        android:pathData="M47,68 L47,70 L52,70 L52,68 Z"
+        android:fillColor="#333333"/>
+    <path
+        android:pathData="M68,68 L68,70 L73,70 L73,68 Z"
+        android:fillColor="#333333"/>
+    
+    <!-- Big Smile -->
+    <path
+        android:pathData="M48,78 Q60,83 72,78"
+        android:strokeColor="#FF6B6B"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"/>
+    
+    <!-- Rosy Cheeks -->
+    <path
+        android:pathData="M40,75 Q40,72 43,72 Q46,72 46,75 Q46,78 43,78 Q40,78 40,75 Z"
+        android:fillColor="#FFB6C1"/>
+    <path
+        android:pathData="M74,75 Q74,72 77,72 Q80,72 80,75 Q80,78 77,78 Q74,78 74,75 Z"
+        android:fillColor="#FFB6C1"/>
+    
+    <!-- Chef Jacket/Body (White) -->
+    <path
+        android:pathData="M35,95 L85,95 L85,115 L35,115 Z"
+        android:fillColor="#FFFFFF"/>
+    <path
+        android:pathData="M35,95 L85,95 L85,115 L35,115 Z"
+        android:strokeColor="#333333"
+        android:strokeWidth="1.5"/>
+    
+    <!-- Chef Jacket Buttons (Yellow circles as rectangles) -->
+    <path
+        android:pathData="M53,100 L57,100 L57,104 L53,104 Z"
+        android:fillColor="#FFD93D"/>
+    <path
+        android:pathData="M63,100 L67,100 L67,104 L63,104 Z"
+        android:fillColor="#FFD93D"/>
+    <path
+        android:pathData="M58,108 L62,108 L62,112 L58,112 Z"
+        android:fillColor="#FFD93D"/>
+</vector>

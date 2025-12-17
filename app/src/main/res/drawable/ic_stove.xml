@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kitchen Stove/Oven -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="150dp"
+    android:height="150dp"
+    android:viewportWidth="150"
+    android:viewportHeight="150">
+    
+    <!-- Stove Body (Gray) -->
+    <path
+        android:pathData="M20,30 L130,30 L130,140 L20,140 Z"
+        android:fillColor="#78909C"/>
+    
+    <!-- Stove Top (Darker) -->
+    <path
+        android:pathData="M15,30 L135,30 L135,50 L15,50 Z"
+        android:fillColor="#546E7A"/>
+    
+    <!-- Burner Area (Dark Circle) -->
+    <path
+        android:pathData="M50,70 L100,70 L100,120 L50,120 Z"
+        android:fillColor="#37474F"/>
+    
+    <!-- Burner Rings -->
+    <path
+        android:pathData="M55,75 L95,75 L95,115 L55,115 Z"
+        android:strokeColor="#263238"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M60,80 L90,80 L90,110 L60,110 Z"
+        android:strokeColor="#263238"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M65,85 L85,85 L85,105 L65,105 Z"
+        android:strokeColor="#263238"
+        android:strokeWidth="2"/>
+    
+    <!-- Control Knobs -->
+    <path
+        android:pathData="M30,45 Q30,42 33,42 Q36,42 36,45 Q36,48 33,48 Q30,48 30,45 Z"
+        android:fillColor="#455A64"/>
+    <path
+        android:pathData="M50,45 Q50,42 53,42 Q56,42 56,45 Q56,48 53,48 Q50,48 50,45 Z"
+        android:fillColor="#455A64"/>
+    <path
+        android:pathData="M70,45 Q70,42 73,42 Q76,42 76,45 Q76,48 73,48 Q70,48 70,45 Z"
+        android:fillColor="#455A64"/>
+    <path
+        android:pathData="M90,45 Q90,42 93,42 Q96,42 96,45 Q96,48 93,48 Q90,48 90,45 Z"
+        android:fillColor="#455A64"/>
+    
+    <!-- Oven Door -->
+    <path
+        android:pathData="M25,125 L125,125 L125,135 L25,135 Z"
+        android:fillColor="#607D8B"/>
+    
+    <!-- Oven Window -->
+    <path
+        android:pathData="M35,128 L115,128 L115,132 L35,132 Z"
+        android:fillColor="#B0BEC5"/>
+</vector>

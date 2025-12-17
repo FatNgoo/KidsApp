@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Speech Bubble Layout - Shows dialogue above characters -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="4dp">
+
+    <!-- Speech Bubble Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-8dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:id="@+id/tvSpeechText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello!"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif-medium"
+            android:padding="12dp"
+            android:maxWidth="200dp"
+            android:maxLines="3"
+            android:ellipsize="end" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Speech Bubble Tail (Triangle pointing down) -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="12dp"
+        android:background="@drawable/speech_bubble_tail" />
+</LinearLayout>

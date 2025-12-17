@@ -1,68 +1,78 @@
 package com.edu.kidsapp;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.ClipData;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Random;
 
 /**
- * CookingGameActivity - MasterChef Game Redesigned
- * Beautiful, colorful kitchen-themed cooking game with recipes
+ * CookingGameActivity - Interactive MasterChef Game
+ * Features chef-customer dialogue and step-by-step cooking process
  */
 public class CookingGameActivity extends AppCompatActivity {
 
+    // Cooking Steps
+    private enum CookingStep {
+        CUSTOMER_ORDER,      // Customer orders food
+        CHEF_ACKNOWLEDGE,    // Chef responds "Waiting five minutes"
+        CHEF_NEED_PAN,       // Chef puts pan on stove
+        CHEF_NEED_CHICKEN,   // Chef requests chicken
+        CHEF_NEED_OIL,       // Chef requests oil
+        COOKING,             // Chef is cooking
+        CHEF_DONE,           // Chef says "Wow, yummy yummy"
+        CUSTOMER_THANKS      // Customer says "Thank you very much"
+    }
+
     // UI Components
-    private ImageView imgPot, imgCustomer, imgDish;
-    private TextView tvDishName, tvScore;
-    private ImageButton btnSpeaker;
-    private LinearLayout checklistContainer;
+    private ImageView imgCustomer, imgChef, imgPan, imgStove;
+    private TextView tvScore, tvCookingStatus;
+    private FrameLayout customerSpeechBubble, chefSpeechBubble;
+    private TextView tvCustomerSpeech, tvChefSpeech;
     private GridLayout ingredientGrid;
 
     // Game State
-    private Recipe currentRecipe;
+    private CookingStep currentStep = CookingStep.CUSTOMER_ORDER;
+    private String currentDish = "Fried Chicken";
     private int score = 0;
-    private List<String> addedIngredients = new ArrayList<>();
-    private Map<String, View> checklistItems = new HashMap<>();
-    
+    private List<String> collectedIngredients = new ArrayList<>();
+
     // Text to Speech
     private TextToSpeech textToSpeech;
     private boolean ttsReady = false;
 
-    // Recipe Database
-    private List<Recipe> recipes = new ArrayList<>();
-    private Random random = new Random();
+    // Handler for delays
+    private Handler handler = new Handler(Looper.getMainLooper());
 
     // All available ingredients
     private static final Ingredient[] ALL_INGREDIENTS = {
-            new Ingredient("APPLE", "Apple", "🍎", R.drawable.food_apple),
-            new Ingredient("BANANA", "Banana", "🍌", R.drawable.food_banana),
-            new Ingredient("CABBAGE", "Cabbage", "🥬", R.drawable.food_cabbage),
-            new Ingredient("TOMATO", "Tomato", "🍅", R.drawable.food_apple), // Replace with actual drawable
-            new Ingredient("CARROT", "Carrot", "🥕", R.drawable.food_banana), // Replace with actual drawable
-            new Ingredient("BREAD", "Bread", "🍞", R.drawable.food_cabbage), // Replace with actual drawable
-            new Ingredient("CHEESE", "Cheese", "🧀", R.drawable.food_apple), // Replace with actual drawable
-            new Ingredient("EGG", "Egg", "🥚", R.drawable.food_banana) // Replace with actual drawable
+            new Ingredient("CHICKEN", "Chicken", "🍗", R.drawable.food_apple),
+            new Ingredient("OIL", "Oil", "🛢️", R.drawable.food_banana),
+            new Ingredient("SALT", "Salt", "🧂", R.drawable.food_cabbage),
+            new Ingredient("PEPPER", "Pepper", "🌶️", R.drawable.food_apple),
+            new Ingredient("BREAD", "Bread", "🍞", R.drawable.food_banana),
+            new Ingredient("CHEESE", "Cheese", "🧀", R.drawable.food_cabbage),
+            new Ingredient("EGG", "Egg", "🥚", R.drawable.food_apple),
+            new Ingredient("TOMATO", "Tomato", "🍅", R.drawable.food_banana)
     };
 
     @Override
@@ -81,17 +91,11 @@ public class CookingGameActivity extends AppCompatActivity {
         // Initialize views
         initializeViews();
 
-        // Initialize recipes
-        initializeRecipes();
-
         // Setup ingredient grid
         setupIngredientGrid();
 
-        // Setup drop listener for pot
-        setupDropListener();
-
-        // Start first recipe
-        loadNewRecipe();
+        // Start cooking sequence
+        startCookingSequence();
     }
 
     /**
@@ -111,50 +115,19 @@ public class CookingGameActivity extends AppCompatActivity {
      * Initialize all views
      */
     private void initializeViews() {
-        imgPot = findViewById(R.id.imgPot);
         imgCustomer = findViewById(R.id.imgCustomer);
-        imgDish = findViewById(R.id.imgDish);
-        tvDishName = findViewById(R.id.tvDishName);
+        imgChef = findViewById(R.id.imgChef);
+        imgPan = findViewById(R.id.imgPan);
+        imgStove = findViewById(R.id.imgStove);
         tvScore = findViewById(R.id.tvScore);
-        btnSpeaker = findViewById(R.id.btnSpeaker);
-        checklistContainer = findViewById(R.id.checklistContainer);
+        tvCookingStatus = findViewById(R.id.tvCookingStatus);
+        
+        customerSpeechBubble = findViewById(R.id.customerSpeechBubble);
+        chefSpeechBubble = findViewById(R.id.chefSpeechBubble);
+        tvCustomerSpeech = findViewById(R.id.tvCustomerSpeech);
+        tvChefSpeech = findViewById(R.id.tvChefSpeech);
+        
         ingredientGrid = findViewById(R.id.ingredientGrid);
-
-        // Speaker button click listener
-        btnSpeaker.setOnClickListener(v -> speakDishName());
-    }
-
-    /**
-     * Speak the dish name using TTS
-     */
-    private void speakDishName() {
-        if (ttsReady && currentRecipe != null) {
-            textToSpeech.speak(currentRecipe.name, TextToSpeech.QUEUE_FLUSH, null, null);
-            // Animate button
-            btnSpeaker.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100)
-                    .withEndAction(() -> btnSpeaker.animate().scaleX(1f).scaleY(1f).setDuration(100).start())
-                    .start();
-        }
-    }
-
-    /**
-     * Initialize recipe database
-     */
-    private void initializeRecipes() {
-        recipes.add(new Recipe("Fruit Salad", "🥗", 
-                new String[]{"APPLE", "BANANA"}, R.drawable.food_apple));
-        
-        recipes.add(new Recipe("Veggie Mix", "🥙", 
-                new String[]{"CABBAGE", "CARROT", "TOMATO"}, R.drawable.food_cabbage));
-        
-        recipes.add(new Recipe("Breakfast Special", "🍳", 
-                new String[]{"EGG", "BREAD", "TOMATO"}, R.drawable.food_banana));
-        
-        recipes.add(new Recipe("Cheese Toast", "🥪", 
-                new String[]{"BREAD", "CHEESE"}, R.drawable.food_apple));
-        
-        recipes.add(new Recipe("Rainbow Bowl", "🌈", 
-                new String[]{"APPLE", "BANANA", "CARROT", "CABBAGE"}, R.drawable.food_apple));
     }
 
     /**
@@ -200,26 +173,133 @@ public class CookingGameActivity extends AppCompatActivity {
     }
 
     /**
-     * Setup drop listener for the pot
+     * Start the cooking sequence
      */
-    private void setupDropListener() {
-        imgPot.setOnDragListener((view, event) -> {
+    private void startCookingSequence() {
+        currentStep = CookingStep.CUSTOMER_ORDER;
+        collectedIngredients.clear();
+        
+        // Step 1: Customer orders
+        showCustomerDialogue("I want order " + currentDish);
+        speakText("I want order " + currentDish);
+        
+        // Move to next step after 3 seconds
+        handler.postDelayed(() -> {
+            currentStep = CookingStep.CHEF_ACKNOWLEDGE;
+            showChefDialogue("Waiting five minutes");
+            speakText("Waiting five minutes");
+            
+            // Move to pan placement
+            handler.postDelayed(() -> {
+                currentStep = CookingStep.CHEF_NEED_PAN;
+                placePanOnStove();
+                
+                // Request chicken
+                handler.postDelayed(() -> {
+                    currentStep = CookingStep.CHEF_NEED_CHICKEN;
+                    showChefDialogue("I need chicken");
+                    speakText("I need chicken");
+                    enableIngredientDragDrop("CHICKEN");
+                }, 2000);
+            }, 3000);
+        }, 3000);
+    }
+
+    /**
+     * Show customer dialogue in speech bubble
+     */
+    private void showCustomerDialogue(String message) {
+        tvCustomerSpeech.setText(message);
+        customerSpeechBubble.setVisibility(View.VISIBLE);
+        customerSpeechBubble.setAlpha(0f);
+        customerSpeechBubble.animate().alpha(1f).setDuration(300).start();
+    }
+
+    /**
+     * Hide customer dialogue
+     */
+    private void hideCustomerDialogue() {
+        customerSpeechBubble.animate().alpha(0f).setDuration(300)
+            .withEndAction(() -> customerSpeechBubble.setVisibility(View.GONE))
+            .start();
+    }
+
+    /**
+     * Show chef dialogue in speech bubble
+     */
+    private void showChefDialogue(String message) {
+        tvChefSpeech.setText(message);
+        chefSpeechBubble.setVisibility(View.VISIBLE);
+        chefSpeechBubble.setAlpha(0f);
+        chefSpeechBubble.animate().alpha(1f).setDuration(300).start();
+    }
+
+    /**
+     * Hide chef dialogue
+     */
+    private void hideChefDialogue() {
+        chefSpeechBubble.animate().alpha(0f).setDuration(300)
+            .withEndAction(() -> chefSpeechBubble.setVisibility(View.GONE))
+            .start();
+    }
+
+    /**
+     * Speak text using TTS
+     */
+    private void speakText(String text) {
+        if (ttsReady && textToSpeech != null) {
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+        }
+    }
+
+    /**
+     * Place pan on stove with bounce effect
+     */
+    private void placePanOnStove() {
+        hideChefDialogue();
+        imgPan.setVisibility(View.VISIBLE);
+        imgPan.setAlpha(0f);
+        imgPan.setScaleX(0.3f);
+        imgPan.setScaleY(0.3f);
+        imgPan.setTranslationY(-200f);
+        
+        // Bounce animation - pan drops onto stove
+        imgPan.animate()
+            .alpha(1f)
+            .scaleX(1.2f)
+            .scaleY(1.2f)
+            .translationY(0f)
+            .setDuration(400)
+            .withEndAction(() -> {
+                // Settle back to normal size
+                imgPan.animate()
+                    .scaleX(1.0f)
+                    .scaleY(1.0f)
+                    .setDuration(150)
+                    .start();
+            })
+            .start();
+    }
+
+    /**
+     * Enable drag and drop for specific ingredient
+     */
+    private void enableIngredientDragDrop(String ingredientId) {
+        // Setup drop listener on chef
+        imgChef.setOnDragListener((view, event) -> {
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    // Scale up pot
                     view.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200).start();
                     return true;
 
                 case DragEvent.ACTION_DRAG_EXITED:
-                    // Reset pot scale
                     view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start();
                     return true;
 
                 case DragEvent.ACTION_DROP:
-                    // Reset pot scale
                     view.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200).start();
                     
                     // Get dropped ingredient
@@ -227,7 +307,7 @@ public class CookingGameActivity extends AppCompatActivity {
                     String droppedIngredient = item.getText().toString();
 
                     // Handle the drop
-                    handleIngredientDrop(droppedIngredient);
+                    handleIngredientDelivery(droppedIngredient, ingredientId);
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -241,156 +321,208 @@ public class CookingGameActivity extends AppCompatActivity {
     }
 
     /**
-     * Handle ingredient drop into pot
+     * Handle ingredient delivery to chef
      */
-    private void handleIngredientDrop(String ingredientId) {
-        // Check if ingredient is needed for current recipe
-        boolean isNeeded = false;
-        for (String needed : currentRecipe.ingredients) {
-            if (needed.equals(ingredientId) && !addedIngredients.contains(ingredientId)) {
-                isNeeded = true;
-                break;
-            }
-        }
-
-        if (isNeeded) {
+    private void handleIngredientDelivery(String droppedIngredient, String expectedIngredient) {
+        if (droppedIngredient.equals(expectedIngredient)) {
             // Correct ingredient!
-            addedIngredients.add(ingredientId);
-            updateChecklist(ingredientId);
-            animateCooking();
+            collectedIngredients.add(droppedIngredient);
+            hideChefDialogue();
+            
+            // Animate chef receiving ingredient
+            animateChefReceive();
+            
             Toast.makeText(this, "Perfect! ✓", Toast.LENGTH_SHORT).show();
-
-            // Check if recipe is complete
-            if (addedIngredients.size() == currentRecipe.ingredients.length) {
-                recipeComplete();
-            }
+            
+            // Move to next step
+            handler.postDelayed(() -> {
+                if (currentStep == CookingStep.CHEF_NEED_CHICKEN) {
+                    // Request oil next
+                    currentStep = CookingStep.CHEF_NEED_OIL;
+                    showChefDialogue("I need some oil");
+                    speakText("I need some oil");
+                    enableIngredientDragDrop("OIL");
+                } else if (currentStep == CookingStep.CHEF_NEED_OIL) {
+                    // Start cooking
+                    currentStep = CookingStep.COOKING;
+                    startCooking();
+                }
+            }, 1500);
         } else {
             // Wrong ingredient
-            animateShake();
             Toast.makeText(this, "Wrong ingredient! ❌", Toast.LENGTH_SHORT).show();
+            animateShake(imgChef);
         }
     }
 
     /**
-     * Update checklist to show ingredient as added
+     * Animate chef receiving ingredient with happy jump
      */
-    private void updateChecklist(String ingredientId) {
-        View checklistItem = checklistItems.get(ingredientId);
-        if (checklistItem != null) {
-            ImageView checkmark = checklistItem.findViewById(R.id.imgCheckmark);
-            checkmark.setVisibility(View.VISIBLE);
-            checkmark.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200)
-                    .withEndAction(() -> checkmark.animate().scaleX(1f).scaleY(1f).setDuration(100).start())
-                    .start();
-        }
+    private void animateChefReceive() {
+        // Jump up and down with joy
+        imgChef.animate()
+            .scaleX(1.15f)
+            .scaleY(1.15f)
+            .translationY(-15f)
+            .setDuration(200)
+            .withEndAction(() -> 
+                imgChef.animate()
+                    .scaleX(1.0f)
+                    .scaleY(1.0f)
+                    .translationY(0f)
+                    .setDuration(200)
+                    .start()
+            )
+            .start();
     }
 
     /**
-     * Recipe completed successfully
+     * Start cooking animation
      */
-    private void recipeComplete() {
-        score++;
-        tvScore.setText("⭐ " + score);
+    private void startCooking() {
+        hideChefDialogue();
         
-        // Celebration animation
-        imgPot.animate()
-                .rotationBy(360)
-                .scaleX(1.3f)
-                .scaleY(1.3f)
-                .setDuration(500)
-                .withEndAction(() -> {
-                    imgPot.animate().scaleX(1f).scaleY(1f).setDuration(200).start();
-                    Toast.makeText(this, "🎉 Delicious! Recipe Complete! 🎉", Toast.LENGTH_LONG).show();
-                    
-                    // Load new recipe after delay
-                    imgPot.postDelayed(this::loadNewRecipe, 1500);
-                })
-                .start();
+        // Show cooking status
+        tvCookingStatus.setVisibility(View.VISIBLE);
+        tvCookingStatus.setText("🔥");
+        
+        // Animate pan cooking
+        animatePanCooking();
+        
+        // Finish cooking after 3 seconds
+        handler.postDelayed(() -> {
+            currentStep = CookingStep.CHEF_DONE;
+            tvCookingStatus.setVisibility(View.GONE);
+            
+            showChefDialogue("Wow, yummy yummy");
+            speakText("Wow, yummy yummy");
+            
+            // Serve to customer
+            handler.postDelayed(() -> {
+                serveDishToCustomer();
+            }, 2000);
+        }, 3000);
     }
 
     /**
-     * Load a new random recipe
+     * Animate pan cooking with steam and rotation
      */
-    private void loadNewRecipe() {
-        // Pick random recipe
-        currentRecipe = recipes.get(random.nextInt(recipes.size()));
+    private void animatePanCooking() {
+        // Rotate pan while cooking
+        ObjectAnimator rotation = ObjectAnimator.ofFloat(imgPan, "rotation", 0f, -3f, 3f, -3f, 3f, 0f);
+        rotation.setDuration(400);
+        rotation.setRepeatCount(7);
+        rotation.start();
         
-        // Reset state
-        addedIngredients.clear();
-        checklistItems.clear();
+        // Pan also bounces slightly
+        ObjectAnimator bounce = ObjectAnimator.ofFloat(imgPan, "translationY", 0f, -5f, 0f, -5f, 0f);
+        bounce.setDuration(400);
+        bounce.setRepeatCount(7);
+        bounce.start();
         
-        // Update UI
-        tvDishName.setText(currentRecipe.name);
-        imgDish.setImageResource(currentRecipe.dishImage);
+        // Animate cooking status (steam rising)
+        tvCookingStatus.setAlpha(1f);
+        tvCookingStatus.setScaleX(1f);
+        tvCookingStatus.setScaleY(1f);
         
-        // Build checklist
-        buildChecklist();
+        ObjectAnimator steamRise = ObjectAnimator.ofFloat(tvCookingStatus, "translationY", 0f, -30f);
+        ObjectAnimator steamFade = ObjectAnimator.ofFloat(tvCookingStatus, "alpha", 1f, 0f);
+        steamRise.setDuration(800);
+        steamFade.setDuration(800);
+        steamRise.setRepeatCount(ObjectAnimator.INFINITE);
+        steamFade.setRepeatCount(ObjectAnimator.INFINITE);
+        steamRise.setRepeatMode(ObjectAnimator.RESTART);
+        steamFade.setRepeatMode(ObjectAnimator.RESTART);
+        steamRise.start();
+        steamFade.start();
     }
 
     /**
-     * Build the checklist for current recipe
+     * Serve dish to customer
      */
-    private void buildChecklist() {
-        checklistContainer.removeAllViews();
+    private void serveDishToCustomer() {
+        hideChefDialogue();
         
-        for (String ingredientId : currentRecipe.ingredients) {
-            // Find ingredient details
-            Ingredient ingredient = findIngredient(ingredientId);
-            if (ingredient != null) {
-                View itemView = createChecklistItem(ingredient);
-                checklistContainer.addView(itemView);
-                checklistItems.put(ingredientId, itemView);
-            }
-        }
+        // Hide pan
+        imgPan.animate().alpha(0f).setDuration(300)
+            .withEndAction(() -> imgPan.setVisibility(View.GONE))
+            .start();
+        
+        // Customer thanks
+        handler.postDelayed(() -> {
+            currentStep = CookingStep.CUSTOMER_THANKS;
+            hideCustomerDialogue();
+            
+            handler.postDelayed(() -> {
+                showCustomerDialogue("Thank you very much");
+                speakText("Thank you very much");
+                
+                // Update score
+                score++;
+                tvScore.setText("⭐ " + score);
+                
+                // Celebrate
+                animateCelebration();
+                
+                // Start new round
+                handler.postDelayed(() -> {
+                    hideCustomerDialogue();
+                    startCookingSequence();
+                }, 4000);
+            }, 500);
+        }, 1000);
     }
 
     /**
-     * Create a checklist item view
+     * Animate celebration with customer bouncing happily
      */
-    private View createChecklistItem(Ingredient ingredient) {
-        View itemView = LayoutInflater.from(this).inflate(
-                R.layout.item_checklist, checklistContainer, false);
-        
-        TextView tvName = itemView.findViewById(R.id.tvChecklistName);
-        ImageView imgCheckmark = itemView.findViewById(R.id.imgCheckmark);
-        
-        tvName.setText(ingredient.emoji + " " + ingredient.displayName);
-        imgCheckmark.setVisibility(View.GONE);
-        
-        return itemView;
+    private void animateCelebration() {
+        // Customer bounces up and down with excitement
+        imgCustomer.animate()
+            .scaleX(1.25f)
+            .scaleY(1.25f)
+            .rotation(10f)
+            .setDuration(250)
+            .withEndAction(() -> 
+                imgCustomer.animate()
+                    .scaleX(1.1f)
+                    .scaleY(1.1f)
+                    .rotation(-10f)
+                    .setDuration(250)
+                    .withEndAction(() ->
+                        imgCustomer.animate()
+                            .scaleX(1.0f)
+                            .scaleY(1.0f)
+                            .rotation(0f)
+                            .setDuration(250)
+                            .start()
+                    )
+                    .start()
+            )
+            .start();
+            
+        // Chef also celebrates with a wave
+        imgChef.animate()
+            .scaleX(1.15f)
+            .scaleY(1.15f)
+            .setDuration(300)
+            .withEndAction(() -> 
+                imgChef.animate()
+                    .scaleX(1.0f)
+                    .scaleY(1.0f)
+                    .setDuration(300)
+                    .start()
+            )
+            .start();
+            
+        Toast.makeText(this, "🎉 Delicious! 🎉", Toast.LENGTH_LONG).show();
     }
 
     /**
-     * Find ingredient by ID
+     * Animate shake effect
      */
-    private Ingredient findIngredient(String id) {
-        for (Ingredient ingredient : ALL_INGREDIENTS) {
-            if (ingredient.id.equals(id)) {
-                return ingredient;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Animate pot when correct ingredient added
-     */
-    private void animateCooking() {
-        imgPot.animate()
-                .scaleX(1.15f)
-                .scaleY(1.15f)
-                .setDuration(150)
-                .withEndAction(() -> 
-                    imgPot.animate().scaleX(1.0f).scaleY(1.0f).setDuration(150).start()
-                )
-                .start();
-    }
-
-    /**
-     * Animate pot shake when wrong ingredient
-     */
-    private void animateShake() {
-        ObjectAnimator shake = ObjectAnimator.ofFloat(imgPot, "translationX", 
+    private void animateShake(View view) {
+        ObjectAnimator shake = ObjectAnimator.ofFloat(view, "translationX", 
                 0f, -25f, 25f, -25f, 25f, 0f);
         shake.setDuration(400);
         shake.start();
@@ -402,24 +534,10 @@ public class CookingGameActivity extends AppCompatActivity {
             textToSpeech.stop();
             textToSpeech.shutdown();
         }
-        super.onDestroy();
-    }
-
-    /**
-     * Recipe data class
-     */
-    private static class Recipe {
-        String name;
-        String emoji;
-        String[] ingredients;
-        int dishImage;
-
-        Recipe(String name, String emoji, String[] ingredients, int dishImage) {
-            this.name = name;
-            this.emoji = emoji;
-            this.ingredients = ingredients;
-            this.dishImage = dishImage;
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
         }
+        super.onDestroy();
     }
 
     /**
