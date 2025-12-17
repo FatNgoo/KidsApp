@@ -62,7 +62,24 @@
         android:id="@+id/lessonFragment"
         android:name="com.edu.kidsapp.LessonFragment"
         android:label="Lesson"
-        tools:layout="@layout/fragment_lesson" />
+        tools:layout="@layout/fragment_lesson">
+        
+        <!-- Action to navigate to Word Workshop -->
+        <action
+            android:id="@+id/action_lesson_to_word_workshop"
+            app:destination="@id/wordWorkshopFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <!-- Word Workshop Fragment - Spelling Game -->
+    <fragment
+        android:id="@+id/wordWorkshopFragment"
+        android:name="com.edu.kidsapp.WordWorkshopFragment"
+        android:label="Word Workshop"
+        tools:layout="@layout/fragment_word_workshop" />
 
     <!-- Game Lobby Fragment - Game Zone -->
     <fragment

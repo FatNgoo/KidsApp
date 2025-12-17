@@ -140,8 +140,8 @@ public class LessonFragment extends Fragment {
                 "Lesson Complete! 🎉", 
                 Toast.LENGTH_LONG).show();
         
-        // Navigate back to map
-        Navigation.findNavController(requireView()).popBackStack();
+        // Navigate to Word Workshop (Spelling Game)
+        Navigation.findNavController(requireView()).navigate(R.id.action_lesson_to_word_workshop);
     }
 
     /**
