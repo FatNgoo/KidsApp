@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="Adventure Map"
+        android:text="🗺️ Adventure Map"
         android:textColor="@color/text_dark"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/btnBack" />
 
-    <!-- RecyclerView for Level Nodes -->
+    <!-- RecyclerView for Level Nodes (Left-aligned) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLevels"
         android:layout_width="0dp"
@@ -43,6 +43,8 @@
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:paddingVertical="24dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -64,7 +64,16 @@
         android:label="Adventure Map"
         tools:layout="@layout/fragment_map">
         
-        <!-- Action to navigate to Lesson Fragment -->
+        <!-- Action to navigate to Level Detail -->
+        <action
+            android:id="@+id/action_map_to_levelDetail"
+            app:destination="@id/levelDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+            
+        <!-- Keep old action for backward compatibility -->
         <action
             android:id="@+id/action_map_to_lesson"
             app:destination="@id/lessonFragment"
@@ -72,6 +81,32 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <!-- Level Detail Fragment - Shows 3 Activities (Flashcard, Word Workshop, Mini Quiz) -->
+    <fragment
+        android:id="@+id/levelDetailFragment"
+        android:name="com.edu.kidsapp.LevelDetailFragment"
+        android:label="Level Detail"
+        tools:layout="@layout/fragment_level_detail">
+        
+        <!-- Action to navigate to Lesson (Flashcard) -->
+        <action
+            android:id="@+id/action_levelDetail_to_lesson"
+            app:destination="@id/lessonFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Word Workshop -->
+        <action
+            android:id="@+id/action_levelDetail_to_wordWorkshop"
+            app:destination="@id/wordWorkshopFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <!-- Lesson Fragment - Flashcard View -->

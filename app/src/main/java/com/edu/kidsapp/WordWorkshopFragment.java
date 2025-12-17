@@ -50,6 +50,21 @@ public class WordWorkshopFragment extends Fragment {
     private List<TextView> slotViews = new ArrayList<>();
     private List<TextView> sourceLetterViews = new ArrayList<>();
     private int filledSlots = 0;
+    
+    // New: Track level and activity type
+    private int levelId = 1;
+    private String activityType = "wordworkshop";
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        // Get arguments if passed from LevelDetailFragment
+        if (getArguments() != null) {
+            levelId = getArguments().getInt("levelId", 1);
+            activityType = getArguments().getString("activityType", "wordworkshop");
+        }
+    }
 
     @Nullable
     @Override
@@ -108,20 +123,22 @@ public class WordWorkshopFragment extends Fragment {
             // Create TextView for each slot
             TextView slotView = new TextView(getContext());
             
-            // Style: Dashed border empty slot
+            // Style: Dashed border empty slot with pastel colors
             slotView.setBackgroundResource(R.drawable.bg_slot_empty);
-            slotView.setTextSize(24);
+            slotView.setTextSize(28); // Compact text size
             slotView.setTextColor(getResources().getColor(R.color.text_dark, null));
             slotView.setGravity(android.view.Gravity.CENTER);
+            slotView.setFontFeatureSettings("sans-serif-black");
+            slotView.setTypeface(null, android.graphics.Typeface.BOLD);
             
-            // Size: 80x80dp square
+            // Size: 70x70dp square (compact for better fit)
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    (int) (80 * getResources().getDisplayMetrics().density),
-                    (int) (80 * getResources().getDisplayMetrics().density)
+                    (int) (70 * getResources().getDisplayMetrics().density),
+                    (int) (70 * getResources().getDisplayMetrics().density)
             );
-            params.setMargins(8, 0, 8, 0);
+            params.setMargins(4, 0, 4, 0);
             slotView.setLayoutParams(params);
-            slotView.setPadding(16, 16, 16, 16);
+            slotView.setPadding(8, 8, 8, 8);
 
             // CRUCIAL: Store expected letter in Tag for validation later
             slotView.setTag(String.valueOf(expectedChar));
@@ -157,21 +174,23 @@ public class WordWorkshopFragment extends Fragment {
         for (char letter : letters) {
             TextView letterView = new TextView(getContext());
             
-            // Style: White tile with grey border
+            // Style: White tile with pastel purple border
             letterView.setBackgroundResource(R.drawable.bg_letter_tile);
             letterView.setText(String.valueOf(letter));
-            letterView.setTextSize(24);
+            letterView.setTextSize(28); // Compact text size
             letterView.setTextColor(getResources().getColor(R.color.text_dark, null));
             letterView.setGravity(android.view.Gravity.CENTER);
+            letterView.setTypeface(null, android.graphics.Typeface.BOLD);
+            letterView.setElevation(3 * getResources().getDisplayMetrics().density); // Add shadow
             
-            // Size: 80x80dp square
+            // Size: 70x70dp square (compact for better fit)
             FlexboxLayout.LayoutParams params = new FlexboxLayout.LayoutParams(
-                    (int) (80 * getResources().getDisplayMetrics().density),
-                    (int) (80 * getResources().getDisplayMetrics().density)
+                    (int) (70 * getResources().getDisplayMetrics().density),
+                    (int) (70 * getResources().getDisplayMetrics().density)
             );
-            params.setMargins(8, 8, 8, 8);
+            params.setMargins(6, 6, 6, 6);
             letterView.setLayoutParams(params);
-            letterView.setPadding(16, 16, 16, 16);
+            letterView.setPadding(8, 8, 8, 8);
 
             // CRUCIAL: Store letter in Tag for drag data
             letterView.setTag(String.valueOf(letter));
@@ -301,15 +320,18 @@ public class WordWorkshopFragment extends Fragment {
     /**
      * STEP D: Handle game win
      * 
-     * Shows congratulations dialog with reward (+1 Ticket)
-     * Could navigate to next level or back to lesson map
+     * Shows congratulations dialog and marks activity as completed
      */
     private void onGameWon() {
+        // Mark word workshop as completed
+        ProgressManager progressManager = ProgressManager.getInstance(requireContext());
+        progressManager.setActivityCompleted(levelId, activityType);
+        
         new AlertDialog.Builder(getContext())
                 .setTitle("🎉 Correct!")
-                .setMessage("You spelled '" + targetWord + "' correctly!\n\n+1 Ticket 🎟️")
+                .setMessage("You spelled '" + targetWord + "' correctly!\n\n✨ +1 Star")
                 .setPositiveButton("Continue", (dialog, which) -> {
-                    // Navigate back or to next level
+                    // Navigate back to Level Detail page
                     requireActivity().onBackPressed();
                 })
                 .setNegativeButton("Play Again", (dialog, which) -> {
