@@ -92,6 +92,15 @@ public class GameLobbyFragment extends Fragment {
                 1,
                 DetectiveGameActivity.class
         ));
+
+        // Pet Hospital game
+        games.add(new GameModel(
+                3,
+                "Pet Hospital",
+                R.drawable.placeholder_thumb_chef,
+                1,
+                PetHospitalLevelsActivity.class
+        ));
     }
 
     /**

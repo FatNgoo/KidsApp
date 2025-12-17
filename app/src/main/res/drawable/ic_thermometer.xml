@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Medical Thermometer -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="60"
+    android:viewportHeight="60">
+    
+    <!-- Thermometer body -->
+    <path
+        android:pathData="M25,8 L35,8 L35,42 L25,42 Z"
+        android:fillColor="#E0E0E0"/>
+    
+    <!-- Glass tube -->
+    <path
+        android:pathData="M27,10 L33,10 L33,40 L27,40 Z"
+        android:fillColor="#FFFFFF"/>
+    
+    <!-- Red mercury -->
+    <path
+        android:pathData="M28,35 L32,35 L32,40 L28,40 Z"
+        android:fillColor="#EF5350"/>
+    
+    <!-- Bulb at bottom -->
+    <path
+        android:pathData="M24,42 Q24,48 30,48 Q36,48 36,42 Z"
+        android:fillColor="#EF5350"/>
+    
+    <!-- Temperature markings -->
+    <path
+        android:pathData="M33,15 L35,15"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"/>
+    <path
+        android:pathData="M33,20 L35,20"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"/>
+    <path
+        android:pathData="M33,25 L35,25"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"/>
+    <path
+        android:pathData="M33,30 L35,30"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"/>
+</vector>

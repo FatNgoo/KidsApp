@@ -41,6 +41,17 @@
             android:name=".DetectiveGameActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        
+        <!-- Pet Hospital Activities -->
+        <activity
+            android:name=".PetHospitalLevelsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        
+        <activity
+            android:name=".PetHospitalGameActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
             
     </application>
 

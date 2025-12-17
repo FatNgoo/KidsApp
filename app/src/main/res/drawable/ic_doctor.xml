@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Doctor Character -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="150dp"
+    android:viewportWidth="120"
+    android:viewportHeight="150">
+    
+    <!-- White Coat Body -->
+    <path
+        android:pathData="M35,70 L85,70 L85,145 L35,145 Z"
+        android:fillColor="#FFFFFF"/>
+    
+    <!-- Coat Collar -->
+    <path
+        android:pathData="M35,70 L45,65 L45,75 L35,75 Z"
+        android:fillColor="#E8F5E9"/>
+    <path
+        android:pathData="M85,70 L75,65 L75,75 L85,75 Z"
+        android:fillColor="#E8F5E9"/>
+    
+    <!-- Coat Buttons -->
+    <path
+        android:pathData="M57,80 L63,80 L63,84 L57,84 Z"
+        android:fillColor="#64B5F6"/>
+    <path
+        android:pathData="M57,95 L63,95 L63,99 L57,99 Z"
+        android:fillColor="#64B5F6"/>
+    <path
+        android:pathData="M57,110 L63,110 L63,114 L57,114 Z"
+        android:fillColor="#64B5F6"/>
+    
+    <!-- Stethoscope -->
+    <path
+        android:pathData="M50,70 Q50,85 55,90 L65,90 Q70,85 70,70"
+        android:strokeColor="#424242"
+        android:strokeWidth="2"/>
+    <path
+        android:pathData="M60,90 L60,100"
+        android:strokeColor="#424242"
+        android:strokeWidth="2"/>
+    
+    <!-- Head (Peach skin tone) -->
+    <path
+        android:pathData="M45,35 Q45,20 60,20 Q75,20 75,35 L75,50 Q75,60 60,60 Q45,60 45,50 Z"
+        android:fillColor="#FFDAB9"/>
+    
+    <!-- Hair (Brown) -->
+    <path
+        android:pathData="M45,25 Q45,15 60,15 Q75,15 75,25 L75,35 L45,35 Z"
+        android:fillColor="#8D6E63"/>
+    
+    <!-- Eyes -->
+    <path
+        android:pathData="M52,38 L56,38 L56,42 L52,42 Z"
+        android:fillColor="#424242"/>
+    <path
+        android:pathData="M64,38 L68,38 L68,42 L64,42 Z"
+        android:fillColor="#424242"/>
+    
+    <!-- Smile -->
+    <path
+        android:pathData="M52,48 Q60,53 68,48"
+        android:strokeColor="#D32F2F"
+        android:strokeWidth="2"/>
+    
+    <!-- Arms -->
+    <path
+        android:pathData="M30,75 L35,75 L35,100 L30,100 Z"
+        android:fillColor="#FFDAB9"/>
+    <path
+        android:pathData="M85,75 L90,75 L90,100 L85,100 Z"
+        android:fillColor="#FFDAB9"/>
+    
+    <!-- Medical Cap -->
+    <path
+        android:pathData="M43,20 L77,20 L77,25 L43,25 Z"
+        android:fillColor="#FFFFFF"/>
+    <path
+        android:pathData="M45,25 L75,25 Q75,30 60,30 Q45,30 45,25 Z"
+        android:fillColor="#FFFFFF"/>
+</vector>

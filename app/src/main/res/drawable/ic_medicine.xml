@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Medicine Pills -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="60"
+    android:viewportHeight="60">
+    
+    <!-- Pill 1 (capsule) -->
+    <path
+        android:pathData="M15,20 Q12,20 12,23 L12,32 Q12,35 15,35 L25,35 Q28,35 28,32 L28,23 Q28,20 25,20 Z"
+        android:fillColor="#EF5350"/>
+    
+    <!-- Pill 1 bottom half -->
+    <path
+        android:pathData="M15,27 L25,27 L25,32 Q25,35 20,35 Q15,35 15,32 Z"
+        android:fillColor="#FFFFFF"/>
+    
+    <!-- Pill 2 (round) -->
+    <path
+        android:pathData="M40,20 Q33,20 33,27 Q33,34 40,34 Q47,34 47,27 Q47,20 40,20 Z"
+        android:fillColor="#64B5F6"/>
+    
+    <!-- Cross on pill 2 -->
+    <path
+        android:pathData="M39,23 L41,23 L41,31 L39,31 Z"
+        android:fillColor="#FFFFFF"/>
+    <path
+        android:pathData="M36,26 L44,26 L44,28 L36,28 Z"
+        android:fillColor="#FFFFFF"/>
+    
+    <!-- Pill 3 (small round) -->
+    <path
+        android:pathData="M23,42 Q18,42 18,47 Q18,52 23,52 Q28,52 28,47 Q28,42 23,42 Z"
+        android:fillColor="#FFA726"/>
+</vector>

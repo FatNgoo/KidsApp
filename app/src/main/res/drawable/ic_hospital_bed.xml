@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hospital Bed -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="150dp"
+    android:height="100dp"
+    android:viewportWidth="150"
+    android:viewportHeight="100">
+    
+    <!-- Bed frame -->
+    <path
+        android:pathData="M20,40 L130,40 L130,70 L20,70 Z"
+        android:fillColor="#ECEFF1"/>
+    
+    <!-- Mattress -->
+    <path
+        android:pathData="M25,35 L125,35 L125,65 L25,65 Z"
+        android:fillColor="#B3E5FC"/>
+    
+    <!-- Pillow -->
+    <path
+        android:pathData="M95,30 Q90,28 85,28 L105,28 Q110,28 115,30 L115,40 L95,40 Z"
+        android:fillColor="#FFFFFF"/>
+    
+    <!-- Blanket -->
+    <path
+        android:pathData="M30,45 L90,45 L90,62 Q90,64 88,64 L32,64 Q30,64 30,62 Z"
+        android:fillColor="#81C784"/>
+    
+    <!-- Bed legs -->
+    <path
+        android:pathData="M22,70 L22,85 L27,85 L27,70 Z"
+        android:fillColor="#90A4AE"/>
+    <path
+        android:pathData="M123,70 L123,85 L128,85 L128,70 Z"
+        android:fillColor="#90A4AE"/>
+    
+    <!-- Bed frame details -->
+    <path
+        android:pathData="M20,38 L130,38 L130,42 L20,42 Z"
+        android:fillColor="#B0BEC5"/>
+    
+    <!-- Side rail -->
+    <path
+        android:pathData="M18,40 L18,68 L20,68 L20,40 Z"
+        android:fillColor="#78909C"/>
+    <path
+        android:pathData="M130,40 L130,68 L132,68 L132,40 Z"
+        android:fillColor="#78909C"/>
+</vector>
