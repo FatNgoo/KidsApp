@@ -12,10 +12,10 @@
         android:label="Home"
         tools:layout="@layout/fragment_home">
         
-        <!-- Action to navigate to Map Fragment -->
+        <!-- Action to navigate to School Lobby -->
         <action
-            android:id="@+id/action_home_to_map"
-            app:destination="@id/mapFragment"
+            android:id="@+id/action_home_to_school_lobby"
+            app:destination="@id/schoolLobbyFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -34,6 +34,23 @@
         <action
             android:id="@+id/action_home_to_shop"
             app:destination="@id/shopFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <!-- School Lobby Fragment - Classroom Selection -->
+    <fragment
+        android:id="@+id/schoolLobbyFragment"
+        android:name="com.edu.kidsapp.SchoolLobbyFragment"
+        android:label="School Lobby"
+        tools:layout="@layout/fragment_school_lobby">
+        
+        <!-- Action to navigate to Map Fragment -->
+        <action
+            android:id="@+id/action_school_lobby_to_map"
+            app:destination="@id/mapFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
