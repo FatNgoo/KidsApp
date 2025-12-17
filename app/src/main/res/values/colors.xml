@@ -11,4 +11,17 @@
     <color name="pastel_blue">#81D4FA</color> <!-- UI Elements -->
     <color name="text_dark">#37474F</color> <!-- Soft Dark Grey - No Pure Black -->
     <color name="card_white">#FFFFFF</color> <!-- Card Background -->
+    
+    <!-- MasterChef Game Kitchen Theme Colors -->
+    <color name="kitchen_red">#FF6B6B</color> <!-- Bright tomato red -->
+    <color name="kitchen_yellow">#FFD93D</color> <!-- Sunny yellow -->
+    <color name="kitchen_orange">#FF9F40</color> <!-- Vibrant orange -->
+    <color name="kitchen_green">#6BCF7F</color> <!-- Fresh green -->
+    <color name="kitchen_blue">#4ECDC4</color> <!-- Mint blue -->
+    <color name="kitchen_purple">#C77DFF</color> <!-- Lavender purple -->
+    <color name="kitchen_pink">#FF85B3</color> <!-- Sweet pink -->
+    <color name="kitchen_cream">#FFF5E4</color> <!-- Cream background -->
+    <color name="kitchen_brown">#D4A574</color> <!-- Wooden brown -->
+    <color name="success_green">#4CAF50</color> <!-- Success checkmark -->
+    <color name="border_gray">#E0E0E0</color> <!-- Light border -->
 </resources>
