@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Filled Blank Slot for Music Room: Rounded rectangle with solid purple border -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#FFFFFF" />
+    <corners android:radius="12dp" />
+    <stroke
+        android:width="3dp"
+        android:color="#CE93D8" />
+</shape>
