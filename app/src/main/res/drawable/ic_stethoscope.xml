@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stethoscope -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="60"
+    android:viewportHeight="60">
+    
+    <!-- Ear tubes -->
+    <path
+        android:pathData="M15,12 Q15,20 20,25"
+        android:strokeColor="#607D8B"
+        android:strokeWidth="3"/>
+    <path
+        android:pathData="M45,12 Q45,20 40,25"
+        android:strokeColor="#607D8B"
+        android:strokeWidth="3"/>
+    
+    <!-- Earpieces -->
+    <path
+        android:pathData="M12,10 L18,10 L18,14 L12,14 Z"
+        android:fillColor="#78909C"/>
+    <path
+        android:pathData="M42,10 L48,10 L48,14 L42,14 Z"
+        android:fillColor="#78909C"/>
+    
+    <!-- Main tube -->
+    <path
+        android:pathData="M20,25 L30,30 L30,48"
+        android:strokeColor="#607D8B"
+        android:strokeWidth="3"/>
+    <path
+        android:pathData="M40,25 L30,30"
+        android:strokeColor="#607D8B"
+        android:strokeWidth="3"/>
+    
+    <!-- Chest piece (diaphragm) -->
+    <path
+        android:pathData="M22,45 Q22,52 30,52 Q38,52 38,45 Z"
+        android:fillColor="#90A4AE"/>
+    
+    <!-- Chest piece inner -->
+    <path
+        android:pathData="M25,46 Q25,50 30,50 Q35,50 35,46 Z"
+        android:fillColor="#ECEFF1"/>
+</vector>

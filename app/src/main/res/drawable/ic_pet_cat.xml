@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Sick Cat Patient -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Body (Orange) -->
+    <path
+        android:pathData="M30,55 Q25,55 25,60 L25,75 Q25,82 30,82 L70,82 Q75,82 75,75 L75,60 Q75,55 70,55 Z"
+        android:fillColor="#FF9800"/>
+    
+    <!-- Head (Orange) -->
+    <path
+        android:pathData="M32,32 Q28,32 28,36 L28,52 Q28,58 35,58 L65,58 Q72,58 72,52 L72,36 Q72,32 68,32 Z"
+        android:fillColor="#FFB74D"/>
+    
+    <!-- Pointy Ears -->
+    <path
+        android:pathData="M32,25 L38,32 L32,32 Z"
+        android:fillColor="#FF9800"/>
+    <path
+        android:pathData="M68,25 L62,32 L68,32 Z"
+        android:fillColor="#FF9800"/>
+    
+    <!-- Snout -->
+    <path
+        android:pathData="M42,46 Q42,50 50,52 Q58,50 58,46 Z"
+        android:fillColor="#FFCCBC"/>
+    
+    <!-- Nose (Pink) -->
+    <path
+        android:pathData="M47,46 L53,46 L50,49 Z"
+        android:fillColor="#F48FB1"/>
+    
+    <!-- Eyes (sick) -->
+    <path
+        android:pathData="M38,38 L42,38 L42,41 L38,41 Z"
+        android:fillColor="#424242"/>
+    <path
+        android:pathData="M58,38 L62,38 L62,41 L58,41 Z"
+        android:fillColor="#424242"/>
+    
+    <!-- Bandage -->
+    <path
+        android:pathData="M30,34 L70,34 L70,40 L30,40 Z"
+        android:fillColor="#FFFFFF"/>
+    <path
+        android:pathData="M48,34 L52,34 L52,40 L48,40 Z"
+        android:fillColor="#EF5350"/>
+    
+    <!-- Whiskers -->
+    <path
+        android:pathData="M25,44 L35,45"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"/>
+    <path
+        android:pathData="M25,48 L35,48"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"/>
+    <path
+        android:pathData="M75,44 L65,45"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"/>
+    <path
+        android:pathData="M75,48 L65,48"
+        android:strokeColor="#757575"
+        android:strokeWidth="1"/>
+    
+    <!-- Tail (curled) -->
+    <path
+        android:pathData="M75,68 Q85,65 88,58"
+        android:strokeColor="#FF9800"
+        android:strokeWidth="5"/>
+    
+    <!-- Legs -->
+    <path
+        android:pathData="M32,82 L32,92 L37,92 L37,82 Z"
+        android:fillColor="#E65100"/>
+    <path
+        android:pathData="M48,82 L48,92 L53,92 L53,82 Z"
+        android:fillColor="#E65100"/>
+    <path
+        android:pathData="M56,82 L56,92 L61,92 L61,82 Z"
+        android:fillColor="#E65100"/>
+    <path
+        android:pathData="M68,82 L68,92 L73,92 L73,82 Z"
+        android:fillColor="#E65100"/>
+</vector>

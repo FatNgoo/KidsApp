@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bandage/Band-aid -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="60"
+    android:viewportHeight="60">
+    
+    <!-- Bandage body -->
+    <path
+        android:pathData="M10,22 L50,22 L50,38 L10,38 Z"
+        android:fillColor="#FFEAA7"/>
+    
+    <!-- Gauze pad (center) -->
+    <path
+        android:pathData="M20,24 L40,24 L40,36 L20,36 Z"
+        android:fillColor="#FFFFFF"/>
+    
+    <!-- Cross on gauze -->
+    <path
+        android:pathData="M28,26 L32,26 L32,34 L28,34 Z"
+        android:fillColor="#EF5350"/>
+    <path
+        android:pathData="M24,28 L36,28 L36,32 L24,32 Z"
+        android:fillColor="#EF5350"/>
+    
+    <!-- Adhesive holes -->
+    <path
+        android:pathData="M12,26 L14,26 L14,28 L12,28 Z"
+        android:fillColor="#D4A574"/>
+    <path
+        android:pathData="M12,32 L14,32 L14,34 L12,34 Z"
+        android:fillColor="#D4A574"/>
+    <path
+        android:pathData="M46,26 L48,26 L48,28 L46,28 Z"
+        android:fillColor="#D4A574"/>
+    <path
+        android:pathData="M46,32 L48,32 L48,34 L46,34 Z"
+        android:fillColor="#D4A574"/>
+</vector>

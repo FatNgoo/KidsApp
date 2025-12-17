@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="75dp"
+    android:layout_height="95dp"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_ingredient_item_enhanced"
+    android:padding="6dp"
+    android:elevation="4dp">
+
+    <ImageView
+        android:id="@+id/imgTool"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="Medical Tool"
+        android:src="@drawable/ic_thermometer"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tvToolName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Tool"
+        android:textAlignment="center"
+        android:textColor="@color/text_dark"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+</LinearLayout>

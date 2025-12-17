@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pet Hospital Interactive Treatment Game -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8F5E9"
+    android:padding="12dp">
+
+    <!-- Score Display -->
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="⭐ 0"
+        android:textColor="#F57C00"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- TOP SECTION: Pet Patient Area -->
+    <FrameLayout
+        android:id="@+id/petArea"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Pet Speech Bubble -->
+        <FrameLayout
+            android:id="@+id/petSpeechBubble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:visibility="gone">
+            
+            <TextView
+                android:id="@+id/tvPetSpeech"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_speech_bubble"
+                android:text="I feel sick..."
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                android:elevation="8dp"
+                android:layout_marginBottom="12dp" />
+        </FrameLayout>
+
+        <!-- Pet Character on Hospital Bed -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+            
+            <ImageView
+                android:id="@+id/imgHospitalBed"
+                android:layout_width="180dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center|bottom"
+                android:src="@drawable/ic_hospital_bed"
+                android:contentDescription="Hospital Bed" />
+            
+            <ImageView
+                android:id="@+id/imgPet"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ic_pet_dog"
+                android:contentDescription="Pet Patient" />
+        </FrameLayout>
+    </FrameLayout>
+
+    <!-- MIDDLE SECTION: Doctor & Treatment Area -->
+    <FrameLayout
+        android:id="@+id/doctorArea"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/petArea"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Doctor Area (Left Side) -->
+        <LinearLayout
+            android:id="@+id/doctorSection"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <!-- Doctor Speech Bubble -->
+            <FrameLayout
+                android:id="@+id/doctorSpeechBubble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+                
+                <TextView
+                    android:id="@+id/tvDoctorSpeech"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_speech_bubble"
+                    android:text="Let me check..."
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:elevation="8dp"
+                    android:layout_marginBottom="12dp" />
+            </FrameLayout>
+
+            <!-- Doctor Character -->
+            <ImageView
+                android:id="@+id/imgDoctor"
+                android:layout_width="110dp"
+                android:layout_height="140dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_doctor"
+                android:contentDescription="Doctor" />
+        </LinearLayout>
+
+        <!-- Treatment Status Area (Right Side) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTreatmentStatus"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="end|center_vertical"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            app:strokeColor="#81C784"
+            app:strokeWidth="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvTreatmentTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Treatment"
+                    android:textColor="#388E3C"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imgTreatmentIcon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone"
+                    android:contentDescription="Treatment" />
+
+                <TextView
+                    android:id="@+id/tvTreatmentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="💉"
+                    android:textSize="40sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+
+    <!-- BOTTOM SECTION: Medical Tools Grid -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardMedicalTools"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#4FC3F7"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="3dp"
+        app:layout_constraintTop_toBottomOf="@id/doctorArea"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="🏥 Medical Tools"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:paddingBottom="12dp" />
+
+            <!-- Medical Tools Grid -->
+            <GridLayout
+                android:id="@+id/medicalToolsGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="4"
+                android:rowCount="2"
+                android:alignmentMode="alignBounds"
+                android:useDefaultMargins="true">
+                <!-- Tool items will be added dynamically -->
+            </GridLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Sick Dog Patient -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Body (Brown) -->
+    <path
+        android:pathData="M30,50 Q25,50 25,55 L25,75 Q25,80 30,80 L70,80 Q75,80 75,75 L75,55 Q75,50 70,50 Z"
+        android:fillColor="#A1887F"/>
+    
+    <!-- Head (Brown) -->
+    <path
+        android:pathData="M35,30 Q30,30 30,35 L30,55 Q30,60 35,60 L65,60 Q70,60 70,55 L70,35 Q70,30 65,30 Z"
+        android:fillColor="#BCAAA4"/>
+    
+    <!-- Ears (floppy) -->
+    <path
+        android:pathData="M28,35 L22,40 L22,50 L28,48 Z"
+        android:fillColor="#A1887F"/>
+    <path
+        android:pathData="M72,35 L78,40 L78,50 L72,48 Z"
+        android:fillColor="#A1887F"/>
+    
+    <!-- Snout/Muzzle -->
+    <path
+        android:pathData="M40,48 Q40,52 45,55 L55,55 Q60,52 60,48 Z"
+        android:fillColor="#8D6E63"/>
+    
+    <!-- Nose (Black) -->
+    <path
+        android:pathData="M47,48 L53,48 L53,52 L47,52 Z"
+        android:fillColor="#212121"/>
+    
+    <!-- Eyes (sick/tired) -->
+    <path
+        android:pathData="M40,40 L44,40 L44,43 L40,43 Z"
+        android:fillColor="#424242"/>
+    <path
+        android:pathData="M56,40 L60,40 L60,43 L56,43 Z"
+        android:fillColor="#424242"/>
+    
+    <!-- Bandage on head -->
+    <path
+        android:pathData="M35,32 L65,32 L65,38 L35,38 Z"
+        android:fillColor="#FFFFFF"/>
+    <path
+        android:pathData="M48,32 L52,32 L52,38 L48,38 Z"
+        android:fillColor="#EF5350"/>
+    
+    <!-- Tail -->
+    <path
+        android:pathData="M75,70 Q82,68 85,60"
+        android:strokeColor="#A1887F"
+        android:strokeWidth="4"/>
+    
+    <!-- Legs -->
+    <path
+        android:pathData="M32,80 L32,92 L37,92 L37,80 Z"
+        android:fillColor="#8D6E63"/>
+    <path
+        android:pathData="M46,80 L46,92 L51,92 L51,80 Z"
+        android:fillColor="#8D6E63"/>
+    <path
+        android:pathData="M54,80 L54,92 L59,92 L59,80 Z"
+        android:fillColor="#8D6E63"/>
+    <path
+        android:pathData="M68,80 L68,92 L73,92 L73,80 Z"
+        android:fillColor="#8D6E63"/>
+</vector>
