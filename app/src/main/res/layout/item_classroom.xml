@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="6dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Classroom Icon -->
+        <ImageView
+            android:id="@+id/img_classroom_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="Classroom icon"
+            android:scaleType="centerInside"
+            android:src="@drawable/placeholder_school"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Classroom Title -->
+        <TextView
+            android:id="@+id/tv_classroom_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="The Academy"
+            android:textColor="@color/text_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/img_arrow"
+            app:layout_constraintStart_toEndOf="@id/img_classroom_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Classroom Description -->
+        <TextView
+            android:id="@+id/tv_classroom_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Level based learning"
+            android:textColor="@color/text_dark"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/img_arrow"
+            app:layout_constraintStart_toStartOf="@id/tv_classroom_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_classroom_title" />
+
+        <!-- Arrow Icon -->
+        <ImageView
+            android:id="@+id/img_arrow"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:contentDescription="Enter classroom"
+            android:src="@android:drawable/ic_menu_more"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_dark" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

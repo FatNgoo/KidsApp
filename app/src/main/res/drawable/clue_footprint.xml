@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Footprint Clue: Light Grey Shoe Print -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Sole -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#BDBDBD" />
+            <size
+                android:width="40dp"
+                android:height="30dp" />
+        </shape>
+    </item>
+    <!-- Toe circles -->
+    <item
+        android:top="5dp"
+        android:left="8dp">
+        <shape android:shape="oval">
+            <solid android:color="#BDBDBD" />
+            <size
+                android:width="8dp"
+                android:height="8dp" />
+        </shape>
+    </item>
+</layer-list>

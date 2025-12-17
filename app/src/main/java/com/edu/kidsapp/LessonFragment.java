@@ -31,6 +31,21 @@ public class LessonFragment extends Fragment {
     private LessonAdapter adapter;
     private List<Vocab> vocabList;
     private int currentPosition = 0;
+    
+    // New: Track level and activity type
+    private int levelId = 1;
+    private String activityType = "flashcard";
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        // Get arguments if passed from LevelDetailFragment
+        if (getArguments() != null) {
+            levelId = getArguments().getInt("levelId", 1);
+            activityType = getArguments().getString("activityType", "flashcard");
+        }
+    }
 
     @Nullable
     @Override
@@ -136,11 +151,15 @@ public class LessonFragment extends Fragment {
      * Finish the lesson and navigate back
      */
     private void finishLesson() {
+        // Mark flashcard as completed
+        ProgressManager progressManager = ProgressManager.getInstance(requireContext());
+        progressManager.setActivityCompleted(levelId, activityType);
+        
         Toast.makeText(requireContext(), 
-                "Lesson Complete! 🎉", 
+                "✨ Flashcard Complete! +1 Star", 
                 Toast.LENGTH_LONG).show();
         
-        // Navigate back to map
+        // Navigate back to Level Detail page
         Navigation.findNavController(requireView()).popBackStack();
     }
 

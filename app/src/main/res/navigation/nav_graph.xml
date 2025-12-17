@@ -12,10 +12,10 @@
         android:label="Home"
         tools:layout="@layout/fragment_home">
         
-        <!-- Action to navigate to Map Fragment -->
+        <!-- Action to navigate to School Lobby -->
         <action
-            android:id="@+id/action_home_to_map"
-            app:destination="@id/mapFragment"
+            android:id="@+id/action_home_to_school_lobby"
+            app:destination="@id/schoolLobbyFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
@@ -29,6 +29,32 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Shop -->
+        <action
+            android:id="@+id/action_home_to_shop"
+            app:destination="@id/shopFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <!-- School Lobby Fragment - Classroom Selection -->
+    <fragment
+        android:id="@+id/schoolLobbyFragment"
+        android:name="com.edu.kidsapp.SchoolLobbyFragment"
+        android:label="School Lobby"
+        tools:layout="@layout/fragment_school_lobby">
+        
+        <!-- Action to navigate to Map Fragment -->
+        <action
+            android:id="@+id/action_school_lobby_to_map"
+            app:destination="@id/mapFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <!-- Map Fragment - Adventure Map / Lesson Selection -->
@@ -38,7 +64,16 @@
         android:label="Adventure Map"
         tools:layout="@layout/fragment_map">
         
-        <!-- Action to navigate to Lesson Fragment -->
+        <!-- Action to navigate to Level Detail -->
+        <action
+            android:id="@+id/action_map_to_levelDetail"
+            app:destination="@id/levelDetailFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+            
+        <!-- Keep old action for backward compatibility -->
         <action
             android:id="@+id/action_map_to_lesson"
             app:destination="@id/lessonFragment"
@@ -48,12 +83,71 @@
             app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 
+    <!-- Level Detail Fragment - Shows 3 Activities (Flashcard, Word Workshop, Mini Quiz) -->
+    <fragment
+        android:id="@+id/levelDetailFragment"
+        android:name="com.edu.kidsapp.LevelDetailFragment"
+        android:label="Level Detail"
+        tools:layout="@layout/fragment_level_detail">
+        
+        <!-- Action to navigate to Lesson (Flashcard) -->
+        <action
+            android:id="@+id/action_levelDetail_to_lesson"
+            app:destination="@id/lessonFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Word Workshop -->
+        <action
+            android:id="@+id/action_levelDetail_to_wordWorkshop"
+            app:destination="@id/wordWorkshopFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Mini Quiz -->
+        <action
+            android:id="@+id/action_levelDetail_to_miniQuiz"
+            app:destination="@id/miniQuizFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
     <!-- Lesson Fragment - Flashcard View -->
     <fragment
         android:id="@+id/lessonFragment"
         android:name="com.edu.kidsapp.LessonFragment"
         android:label="Lesson"
-        tools:layout="@layout/fragment_lesson" />
+        tools:layout="@layout/fragment_lesson">
+        
+        <!-- Action to navigate to Word Workshop -->
+        <action
+            android:id="@+id/action_lesson_to_word_workshop"
+            app:destination="@id/wordWorkshopFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <!-- Word Workshop Fragment - Spelling Game -->
+    <fragment
+        android:id="@+id/wordWorkshopFragment"
+        android:name="com.edu.kidsapp.WordWorkshopFragment"
+        android:label="Word Workshop"
+        tools:layout="@layout/fragment_word_workshop" />
+
+    <!-- Mini Quiz Fragment - Multiple Choice Quiz -->
+    <fragment
+        android:id="@+id/miniQuizFragment"
+        android:name="com.edu.kidsapp.MiniQuizFragment"
+        android:label="Mini Quiz"
+        tools:layout="@layout/fragment_mini_quiz" />
 
     <!-- Game Lobby Fragment - Game Zone -->
     <fragment
@@ -61,5 +155,12 @@
         android:name="com.edu.kidsapp.GameLobbyFragment"
         android:label="Game Zone"
         tools:layout="@layout/fragment_game_lobby" />
+
+    <!-- Shop Fragment - Toy Store -->
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.edu.kidsapp.ShopFragment"
+        android:label="Toy Store"
+        tools:layout="@layout/fragment_shop" />
 
 </navigation>

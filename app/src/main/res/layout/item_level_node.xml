@@ -1,83 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="16dp">
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/card_white">
 
-    <!-- Connector Line (Vertical Path) -->
-    <View
-        android:id="@+id/connectorLine"
-        android:layout_width="8dp"
-        android:layout_height="0dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Level Node Container -->
-    <FrameLayout
-        android:id="@+id/levelNode"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- Level Number -->
-        <TextView
-            android:id="@+id/tvLevelNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="sans-serif-black"
-            android:text="1"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <!-- Stars Container (Below Node) -->
-    <LinearLayout
-        android:id="@+id/starsContainer"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@id/levelNode"
-        app:layout_constraintStart_toStartOf="@id/levelNode"
-        app:layout_constraintTop_toBottomOf="@id/levelNode">
+        android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/star1"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginHorizontal="2dp"
-            android:contentDescription="@string/app_name"
-            android:src="@android:drawable/btn_star_big_on" />
+        <!-- Level Icon/Image (Left side) -->
+        <FrameLayout
+            android:id="@+id/levelNode"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:id="@+id/star2"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginHorizontal="2dp"
-            android:contentDescription="@string/app_name"
-            android:src="@android:drawable/btn_star_big_on" />
+            <!-- Background placeholder image -->
+            <ImageView
+                android:id="@+id/imgLevelIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder_school" />
 
-        <ImageView
-            android:id="@+id/star3"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginHorizontal="2dp"
-            android:contentDescription="@string/app_name"
-            android:src="@android:drawable/btn_star_big_on" />
-    </LinearLayout>
+            <!-- Level Number Overlay -->
+            <TextView
+                android:id="@+id/tvLevelNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-black"
+                android:text="1"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="4" />
+        </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Level Title and Info (Right side) -->
+        <LinearLayout
+            android:id="@+id/levelInfoContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/levelNode"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Level Title -->
+            <TextView
+                android:id="@+id/tvLevelTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Colors"
+                android:textColor="@color/text_dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Stars Container -->
+            <LinearLayout
+                android:id="@+id/starsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/star1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@android:drawable/btn_star_big_on"
+                    android:tint="#FFD700" />
+
+                <ImageView
+                    android:id="@+id/star2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@android:drawable/btn_star_big_on"
+                    android:tint="#FFD700" />
+
+                <ImageView
+                    android:id="@+id/star3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@android:drawable/btn_star_big_on"
+                    android:tint="#FFD700" />
+            </LinearLayout>
+
+            <!-- Lock Status Text -->
+            <TextView
+                android:id="@+id/tvLockStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="🔒 Complete Level 1 first"
+                android:textColor="@color/text_dark"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

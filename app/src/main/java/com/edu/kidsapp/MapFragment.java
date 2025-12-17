@@ -44,20 +44,20 @@ public class MapFragment extends Fragment {
         // Setup RecyclerView
         setupRecyclerView();
 
-        // Create dummy data
+        // Create level data
         createDummyLevels();
 
-        // Set adapter
+        // Initialize ProgressManager
+        ProgressManager progressManager = ProgressManager.getInstance(requireContext());
+
+        // Set adapter with navigation to Level Detail
         levelAdapter = new LevelAdapter(levels, level -> {
-            // Handle level click - navigate to lesson if not locked
-            if (!level.isLocked()) {
-                Navigation.findNavController(view).navigate(R.id.action_map_to_lesson);
-            } else {
-                Toast.makeText(requireContext(), 
-                        "Level " + level.getId() + " is locked", 
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+            // Navigate to Level Detail page
+            Bundle bundle = new Bundle();
+            bundle.putInt("levelId", level.getId());
+            bundle.putString("levelName", level.getName());
+            Navigation.findNavController(view).navigate(R.id.action_map_to_levelDetail, bundle);
+        }, progressManager);
         recyclerViewLevels.setAdapter(levelAdapter);
 
         // Back button handler
@@ -75,28 +75,30 @@ public class MapFragment extends Fragment {
     }
 
     /**
-     * Create dummy level data:
-     * Level 1: Completed with 3 stars
-     * Level 2: Unlocked (Current)
-     * Level 3-10: Locked
+     * Create level data with topics
      */
     private void createDummyLevels() {
         levels = new ArrayList<>();
         
-        // Level 1: Completed with 3 stars
-        levels.add(new LevelModel(1, "Colors", false, true, 3));
-        
-        // Level 2: Current (Unlocked but not completed)
+        // Create 10 levels with different topics
+        levels.add(new LevelModel(1, "Colors", false, false, 0));
         levels.add(new LevelModel(2, "Animals", false, false, 0));
-        
-        // Levels 3-10: Locked
-        levels.add(new LevelModel(3, "Numbers", true, false, 0));
-        levels.add(new LevelModel(4, "Fruits", true, false, 0));
-        levels.add(new LevelModel(5, "Family", true, false, 0));
-        levels.add(new LevelModel(6, "Body Parts", true, false, 0));
-        levels.add(new LevelModel(7, "Weather", true, false, 0));
-        levels.add(new LevelModel(8, "Food", true, false, 0));
-        levels.add(new LevelModel(9, "Clothes", true, false, 0));
-        levels.add(new LevelModel(10, "Actions", true, false, 0));
+        levels.add(new LevelModel(3, "Numbers", false, false, 0));
+        levels.add(new LevelModel(4, "Fruits", false, false, 0));
+        levels.add(new LevelModel(5, "Family", false, false, 0));
+        levels.add(new LevelModel(6, "Body Parts", false, false, 0));
+        levels.add(new LevelModel(7, "Weather", false, false, 0));
+        levels.add(new LevelModel(8, "Food", false, false, 0));
+        levels.add(new LevelModel(9, "Clothes", false, false, 0));
+        levels.add(new LevelModel(10, "Actions", false, false, 0));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh adapter when returning to this screen
+        if (levelAdapter != null) {
+            levelAdapter.notifyDataSetChanged();
+        }
     }
 }

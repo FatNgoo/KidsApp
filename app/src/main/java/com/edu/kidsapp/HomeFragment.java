@@ -75,16 +75,16 @@ public class HomeFragment extends Fragment {
      * Setup click listeners for all interactive elements
      */
     private void setupClickListeners() {
-        // School Button - Navigate to Adventure Map
+        // School Button - Navigate to School Lobby
         cardSchool.setOnClickListener(v -> {
             animateBounce(v);
-            Navigation.findNavController(v).navigate(R.id.action_home_to_map);
+            Navigation.findNavController(v).navigate(R.id.action_home_to_school_lobby);
         });
 
         // Shop Button
         cardShop.setOnClickListener(v -> {
             animateBounce(v);
-            Toast.makeText(requireContext(), "Loading Shop...", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(v).navigate(R.id.action_home_to_shop);
         });
 
         // Game Zone Button - Navigate to Game Lobby

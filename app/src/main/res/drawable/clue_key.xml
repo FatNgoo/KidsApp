@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Key Clue: Deep Orange -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Key head (circle) -->
+    <item
+        android:top="0dp"
+        android:left="0dp"
+        android:right="20dp"
+        android:bottom="20dp">
+        <shape android:shape="oval">
+            <solid android:color="#FF7043" />
+            <stroke
+                android:width="2dp"
+                android:color="#E64A19" />
+        </shape>
+    </item>
+    <!-- Key shaft (rectangle) -->
+    <item
+        android:top="10dp"
+        android:left="15dp"
+        android:bottom="10dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FF7043" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+</layer-list>

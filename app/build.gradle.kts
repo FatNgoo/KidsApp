@@ -41,6 +41,9 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     
+    // FlexboxLayout for dynamic letter layout
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

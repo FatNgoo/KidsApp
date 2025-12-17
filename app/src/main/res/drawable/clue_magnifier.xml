@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Magnifying Glass Clue: Amber -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Glass (circle) -->
+    <item
+        android:top="0dp"
+        android:left="0dp"
+        android:right="15dp"
+        android:bottom="15dp">
+        <shape android:shape="oval">
+            <solid android:color="#FFCA28" />
+            <stroke
+                android:width="2dp"
+                android:color="#FFA000" />
+        </shape>
+    </item>
+    <!-- Handle -->
+    <item
+        android:top="20dp"
+        android:left="20dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFA000" />
+            <corners android:radius="4dp" />
+            <size
+                android:width="4dp"
+                android:height="20dp" />
+        </shape>
+    </item>
+</layer-list>
