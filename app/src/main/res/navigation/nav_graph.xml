@@ -64,6 +64,15 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        
+        <!-- Action to navigate to Speaking Map -->
+        <action
+            android:id="@+id/action_school_lobby_to_speaking_map"
+            app:destination="@id/speakingMapFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <!-- Map Fragment - Adventure Map / Lesson Selection -->
@@ -181,6 +190,30 @@
         android:name="com.edu.kidsapp.MusicRoomFragment"
         android:label="Music Room"
         tools:layout="@layout/fragment_music_room" />
+
+    <!-- Speaking Map Fragment - Speaking Lesson Library -->
+    <fragment
+        android:id="@+id/speakingMapFragment"
+        android:name="com.edu.kidsapp.SpeakingMapFragment"
+        android:label="Speaking Lab"
+        tools:layout="@layout/fragment_speaking_map">
+        
+        <!-- Action to navigate to Speaking Lab with selected lesson -->
+        <action
+            android:id="@+id/action_speaking_map_to_speaking_lab"
+            app:destination="@id/speakingLabFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <!-- Speaking Lab Fragment - Practice Pronunciation -->
+    <fragment
+        android:id="@+id/speakingLabFragment"
+        android:name="com.edu.kidsapp.SpeakingLabFragment"
+        android:label="Speaking Lab"
+        tools:layout="@layout/fragment_speaking_lab" />
 
     <!-- Game Lobby Fragment - Game Zone -->
     <fragment

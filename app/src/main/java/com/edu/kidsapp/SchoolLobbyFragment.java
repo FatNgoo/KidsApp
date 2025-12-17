@@ -109,10 +109,9 @@ public class SchoolLobbyFragment extends Fragment {
                 break;
 
             case 3:
-                // Speaking Lab - Placeholder
-                Toast.makeText(getContext(),
-                        "🎤 Speaking Lab - Coming Soon!",
-                        Toast.LENGTH_SHORT).show();
+                // Speaking Lab - Navigate to Speaking Map
+                Navigation.findNavController(requireView())
+                        .navigate(R.id.action_school_lobby_to_speaking_map);
                 break;
 
             default:
