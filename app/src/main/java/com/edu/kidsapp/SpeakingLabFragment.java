@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.google.android.material.button.MaterialButton;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * SpeakingLabFragment - Practice pronunciation with recording and playback
@@ -62,6 +64,10 @@ public class SpeakingLabFragment extends Fragment {
     private boolean hasRecording = false;
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
 
+    // Text to Speech
+    private TextToSpeech textToSpeech;
+    private boolean ttsReady = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -75,6 +81,9 @@ public class SpeakingLabFragment extends Fragment {
 
         // Initialize UI
         initializeViews(view);
+
+        // Initialize TTS
+        initTextToSpeech();
 
         // Load lesson data from arguments
         loadLessonData();
@@ -133,6 +142,19 @@ public class SpeakingLabFragment extends Fragment {
                 }
             }
         }
+    }
+
+    /**
+     * Initialize text to speech
+     */
+    private void initTextToSpeech() {
+        textToSpeech = new TextToSpeech(requireContext(), status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int result = textToSpeech.setLanguage(Locale.US);
+                ttsReady = (result != TextToSpeech.LANG_MISSING_DATA &&
+                        result != TextToSpeech.LANG_NOT_SUPPORTED);
+            }
+        });
     }
 
     /**
@@ -220,23 +242,15 @@ public class SpeakingLabFragment extends Fragment {
     }
 
     /**
-     * Play pronunciation of current word (simulated with TTS or audio file)
+     * Play pronunciation of current word using TextToSpeech
      */
     private void playPronunciation() {
         VocabItem item = vocabItems.get(currentIndex);
         
-        // Simulate pronunciation playback
-        Toast.makeText(getContext(), 
-                "🔊 Playing: " + item.getWord(), 
-                Toast.LENGTH_SHORT).show();
-
-        // TODO: Implement actual TTS or audio playback
-        // Example with TTS:
-        // TextToSpeech tts = new TextToSpeech(context, status -> {
-        //     if (status == TextToSpeech.SUCCESS) {
-        //         tts.speak(item.getWord(), TextToSpeech.QUEUE_FLUSH, null, null);
-        //     }
-        // });
+        // Play pronunciation with TTS
+        if (ttsReady && textToSpeech != null) {
+            textToSpeech.speak(item.getWord(), TextToSpeech.QUEUE_FLUSH, null, null);
+        }
 
         // Visual feedback
         imgVocab.setAlpha(0.5f);
@@ -389,6 +403,11 @@ public class SpeakingLabFragment extends Fragment {
         super.onDestroyView();
         releaseRecorder();
         releasePlayer();
+        // Cleanup TTS
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
     }
 
     @Override

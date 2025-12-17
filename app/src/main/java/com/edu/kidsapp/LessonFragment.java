@@ -2,6 +2,7 @@ package com.edu.kidsapp;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * LessonFragment - Flashcard lesson screen using ViewPager2
@@ -35,6 +37,10 @@ public class LessonFragment extends Fragment {
     // New: Track level and activity type
     private int levelId = 1;
     private String activityType = "flashcard";
+    
+    // Text to Speech
+    private TextToSpeech textToSpeech;
+    private boolean ttsReady = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +70,9 @@ public class LessonFragment extends Fragment {
         btnNext = view.findViewById(R.id.btnNext);
         View btnClose = view.findViewById(R.id.btnClose);
 
+        // Initialize TTS
+        initTextToSpeech();
+
         // Create dummy vocabulary data
         createVocabularyData();
 
@@ -82,6 +91,19 @@ public class LessonFragment extends Fragment {
     }
 
     /**
+     * Initialize text to speech
+     */
+    private void initTextToSpeech() {
+        textToSpeech = new TextToSpeech(requireContext(), status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int result = textToSpeech.setLanguage(Locale.US);
+                ttsReady = (result != TextToSpeech.LANG_MISSING_DATA &&
+                        result != TextToSpeech.LANG_NOT_SUPPORTED);
+            }
+        });
+    }
+
+    /**
      * Create dummy vocabulary data: 5 words
      */
     private void createVocabularyData() {
@@ -97,7 +119,7 @@ public class LessonFragment extends Fragment {
      * Setup ViewPager2 with adapter and page change listener
      */
     private void setupViewPager() {
-        adapter = new LessonAdapter(vocabList);
+        adapter = new LessonAdapter(vocabList, textToSpeech, () -> ttsReady);
         viewPagerLesson.setAdapter(adapter);
 
         // Listen for page changes to update progress
@@ -175,5 +197,15 @@ public class LessonFragment extends Fragment {
                 })
                 .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
                 .show();
+    }
+
+    @Override
+    public void onDestroy() {
+        // Cleanup TTS
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onDestroy();
     }
 }

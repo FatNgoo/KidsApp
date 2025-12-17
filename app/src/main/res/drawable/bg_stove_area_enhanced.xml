@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stove Area Background - Kitchen Style -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Outer Border (Wood Frame) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#8D6E63"/>
+            <corners android:radius="24dp"/>
+        </shape>
+    </item>
+    
+    <!-- Inner Area (Tile/Counter) -->
+    <item
+        android:top="8dp"
+        android:left="8dp"
+        android:right="8dp"
+        android:bottom="8dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#BCAAA4"/>
+            <corners android:radius="20dp"/>
+        </shape>
+    </item>
+    
+    <!-- Cooking Area (Dark Center) -->
+    <item
+        android:top="16dp"
+        android:left="16dp"
+        android:right="16dp"
+        android:bottom="16dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#78909C"/>
+            <corners android:radius="16dp"/>
+        </shape>
+    </item>
+</layer-list>

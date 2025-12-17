@@ -1,12 +1,12 @@
 package com.edu.kidsapp;
 
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,10 +19,18 @@ import java.util.List;
  */
 public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.FlashcardViewHolder> {
 
-    private List<Vocab> vocabList;
+    public interface TtsReadyProvider {
+        boolean isReady();
+    }
 
-    public LessonAdapter(List<Vocab> vocabList) {
+    private List<Vocab> vocabList;
+    private TextToSpeech textToSpeech;
+    private TtsReadyProvider ttsReadyProvider;
+
+    public LessonAdapter(List<Vocab> vocabList, TextToSpeech textToSpeech, TtsReadyProvider ttsReadyProvider) {
         this.vocabList = vocabList;
+        this.textToSpeech = textToSpeech;
+        this.ttsReadyProvider = ttsReadyProvider;
     }
 
     @NonNull
@@ -44,12 +52,20 @@ public class LessonAdapter extends RecyclerView.Adapter<LessonAdapter.FlashcardV
         // Set image (using placeholder for now)
         holder.imgVocab.setImageResource(R.drawable.placeholder_school);
 
-        // Speaker button click handler
+        // Speaker button click handler - Play pronunciation
         holder.btnSpeaker.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), 
-                    "Playing sound: " + vocab.getEnglish(), 
-                    Toast.LENGTH_SHORT).show();
-            // TODO: Implement actual text-to-speech or audio playback
+            if (ttsReadyProvider.isReady() && textToSpeech != null) {
+                textToSpeech.speak(vocab.getEnglish(), TextToSpeech.QUEUE_FLUSH, null, null);
+                // Animate button
+                holder.btnSpeaker.animate()
+                        .scaleX(0.8f).scaleY(0.8f)
+                        .setDuration(100)
+                        .withEndAction(() -> holder.btnSpeaker.animate()
+                                .scaleX(1f).scaleY(1f)
+                                .setDuration(100)
+                                .start())
+                        .start();
+            }
         });
     }
 
