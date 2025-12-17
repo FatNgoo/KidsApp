@@ -24,4 +24,18 @@
     <color name="kitchen_brown">#D4A574</color> <!-- Wooden brown -->
     <color name="success_green">#4CAF50</color> <!-- Success checkmark -->
     <color name="border_gray">#E0E0E0</color> <!-- Light border -->
+    
+    <!-- Detective Game Mystery Theme Colors -->
+    <color name="detective_navy">#2C3E50</color> <!-- Deep navy blue -->
+    <color name="detective_gold">#F39C12</color> <!-- Detective badge gold -->
+    <color name="detective_red">#E74C3C</color> <!-- Alert red -->
+    <color name="detective_purple">#9B59B6</color> <!-- Mystery purple -->
+    <color name="detective_teal">#1ABC9C</color> <!-- Clue teal -->
+    <color name="detective_orange">#E67E22</color> <!-- Warning orange -->
+    <color name="detective_blue">#3498DB</color> <!-- Investigation blue -->
+    <color name="detective_green">#27AE60</color> <!-- Found green -->
+    <color name="detective_gray">#95A5A6</color> <!-- Neutral gray -->
+    <color name="detective_light">#ECF0F1</color> <!-- Light background -->
+    <color name="detective_dark">#34495E</color> <!-- Dark text -->
+    <color name="detective_yellow">#F1C40F</color> <!-- Highlight yellow -->
 </resources>

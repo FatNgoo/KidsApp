@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_object_item"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imgObject"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_clue_placeholder"
+        android:contentDescription="Hidden object" />
+
+    <TextView
+        android:id="@+id/tvObjectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Key"
+        android:textAlignment="center"
+        android:textColor="@color/text_dark"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+    <ImageView
+        android:id="@+id/imgFoundCheck"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/ic_checkmark"
+        android:visibility="gone"
+        android:contentDescription="Found" />
+
+</LinearLayout>

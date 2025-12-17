@@ -1,69 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/detective_light"
+    android:padding="16dp">
 
-    <!-- Crime Scene Background -->
-    <ImageView
+    <!-- ROW 1: FIND Card (Current Target Object) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardFind"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/bg_crime_scene"
-        android:scaleType="centerCrop"
-        android:contentDescription="Crime scene background" />
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/detective_blue"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:strokeColor="@color/detective_gold"
+        app:strokeWidth="4dp">
 
-    <!-- Hidden Clue 1: Footprint (Top-left area) -->
-    <ImageView
-        android:id="@+id/clue_footprint"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="120dp"
-        android:src="@drawable/clue_footprint"
-        android:tag="footprint"
-        android:contentDescription="Hidden footprint clue" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
 
-    <!-- Hidden Clue 2: Magnifier (Center-right area) -->
-    <ImageView
-        android:id="@+id/clue_magnifier"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="300dp"
-        android:src="@drawable/clue_magnifier"
-        android:tag="magnifier"
-        android:contentDescription="Hidden magnifier clue" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="FIND:"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="12dp" />
 
-    <!-- Hidden Clue 3: Key (Bottom-left area) -->
-    <ImageView
-        android:id="@+id/clue_key"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="550dp"
-        android:src="@drawable/clue_key"
-        android:tag="key"
-        android:contentDescription="Hidden key clue" />
+            <ImageView
+                android:id="@+id/imgCurrentObject"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_clue_placeholder"
+                android:contentDescription="Current object to find"
+                android:layout_marginEnd="12dp" />
 
-    <!-- HUD: Score Display -->
+            <TextView
+                android:id="@+id/tvCurrentObjectName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-black"
+                android:text="Mystery Object"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btnSpeakObject"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_speaker"
+                android:tint="@color/detective_yellow"
+                android:contentDescription="Speak object name" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ROW 2: Scene Image (Hidden Objects) -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardScene"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeColor="@color/detective_navy"
+        app:strokeWidth="3dp">
+
+        <FrameLayout
+            android:id="@+id/sceneContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <!-- Scene background will be set programmatically -->
+            <ImageView
+                android:id="@+id/imgScene"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_crime_scene"
+                android:contentDescription="Detective scene" />
+
+            <!-- Hidden objects will be added dynamically -->
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ROW 3: Hint Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:background="#AA000000"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="12dp">
 
-        <TextView
-            android:id="@+id/tv_score"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnHint"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:text="Clues Found: 0/3"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/detective_orange"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_hint"
+                    android:contentDescription="Hint" />
+
+                <TextView
+                    android:id="@+id/tvHintCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="💡 3"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnMagnifier"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/detective_teal"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_magnifier"
+                    android:contentDescription="Magnifier" />
+
+                <TextView
+                    android:id="@+id/tvMagnifierCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="🔍 2"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnSkip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/detective_red"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_skip"
+                    android:contentDescription="Skip" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="⏭️ Skip"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-</FrameLayout>
+    <!-- ROW 4: Objects to Find List -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:cardBackgroundColor="@color/detective_purple"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-black"
+                    android:text="🔎 Objects to Find"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="0/5"
+                    android:textColor="@color/detective_yellow"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/white" />
+
+            <!-- Horizontal ScrollView for object list -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/objectListContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <!-- Object items will be added dynamically -->
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
